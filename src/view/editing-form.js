@@ -1,6 +1,9 @@
 import {createElement} from '../render';
 
-function createEditingFormTemplate() {
+function createEditingFormTemplate(destination, offer) {
+  const {name, description, pictures} = destination;
+  //const {title} = offer; //const {type, title, price} = offer;
+
   return `<form class="event event--edit" action="#" method="post">
   <header class="event__header">
     <div class="event__type-wrapper">
@@ -66,7 +69,7 @@ function createEditingFormTemplate() {
       <label class="event__label  event__type-output" for="event-destination-1">
         Flight
       </label>
-      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="Geneva" list="destination-list-1">
+      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${name}" list="destination-list-1">
       <datalist id="destination-list-1">
         <option value="Amsterdam"></option>
         <option value="Geneva"></option>
@@ -106,7 +109,7 @@ function createEditingFormTemplate() {
             <span class="event__offer-price">30</span>
           </label>
         </div>
-
+<!--
         <div class="event__offer-selector">
           <input class="event__offer-checkbox  visually-hidden" id="event-offer-comfort-1" type="checkbox" name="event-offer-comfort" checked="">
           <label class="event__offer-label" for="event-offer-comfort-1">
@@ -142,20 +145,22 @@ function createEditingFormTemplate() {
             <span class="event__offer-price">40</span>
           </label>
         </div>
+        -->
       </div>
     </section>
 
     <section class="event__section  event__section--destination">
       <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-      <p class="event__destination-description">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+      <p class="event__destination-description">${description}</p>
 
       <div class="event__photos-container">
         <div class="event__photos-tape">
-          <img class="event__photo" src="img/photos/1.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
+
+         <img class="event__photo" src="${pictures[0].src}" alt="Event photo">
+    <!--  <img class="event__photo" src="img/photos/2.jpg" alt="Event photo">
           <img class="event__photo" src="img/photos/3.jpg" alt="Event photo">
           <img class="event__photo" src="img/photos/4.jpg" alt="Event photo">
-          <img class="event__photo" src="img/photos/5.jpg" alt="Event photo">
+          <img class="event__photo" src="img/photos/5.jpg" alt="Event photo"> -->
         </div>
       </div>
     </section>
@@ -164,8 +169,14 @@ function createEditingFormTemplate() {
 }
 
 export default class EditingFormView {
+
+  constructor(destination, offer) {
+    this.destination = destination;
+    //this.offer = offer;
+  }
+
   getTemplate() {
-    return createEditingFormTemplate();
+    return createEditingFormTemplate(this.destination);
   }
 
   getElement() {
