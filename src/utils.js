@@ -22,7 +22,7 @@ const DATE_FORMAT = {
 export const formatSrtingToDateTime = (inputDate) =>// полная дата
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.fullData) : '';
 
-export const FormatStringToShortDate = (inputDate) =>//месяц день малая
+export const formatStringToShortDate = (inputDate) =>//месяц день малая
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.monthDay) : '';
 
 export const formatStringToTime = (inputDate) =>// часы/минуты

@@ -1,5 +1,5 @@
-import {createElement} from '../render';
-import { createPointTemplite } from '../template/point-template';
+import {createElement} from '../../render';
+import { createPointTemplite } from './template-point';
 
 export default class PointView {
   constructor(point, pointDestination, pointOffers) {

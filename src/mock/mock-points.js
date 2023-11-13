@@ -1,6 +1,5 @@
-import {getRandomArrayElement} from '../utils.js';
 
-const mockPoints = [
+export const mockPoints = [
   {
     'id': '01de1c72-44d0-4af3-bb86-a7cf9fe723d9',
     'type': 'train',
@@ -258,9 +257,4 @@ const mockPoints = [
     ]
   }
 ];
-
-export const generatePoint = () => getRandomArrayElement(mockPoints);
-
-// const arrPoints = Array.from({length: 3}, () => generatePoint());
-
 

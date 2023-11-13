@@ -1,3 +1,4 @@
+import { getRandomArrayElement } from '../utils';
 
 export default class PointsModel {
   constructor(points) {
@@ -7,5 +8,10 @@ export default class PointsModel {
   get() {
     return this.points;
   }
+
+  getPoint() {
+    return getRandomArrayElement(this.points);
+  }
+
 }
 

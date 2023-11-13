@@ -1,11 +1,12 @@
-import { formatStringToTime, FormatStringToShortDate, getPointDuration } from '../utils.js';
+import { formatStringToTime, formatStringToShortDate, getPointDuration } from '../../utils.js';
 
 export function createPointTemplite(point, pointDestination, pointOffers){
   const { basePrice, type, isFavorite, dateFrom, dateTo} = point;
   const { name} = pointDestination;
-  return `<li class="trip-events__item">
+  return `<li class="trip-events__item"> 
+
   <div class="event">
-    <time class="event__date" datetime=${dateFrom}>${FormatStringToShortDate(dateFrom)}</time>
+    <time class="event__date" datetime=${dateFrom}>${formatStringToShortDate(dateFrom)}</time>
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
     </div>
@@ -24,11 +25,11 @@ export function createPointTemplite(point, pointDestination, pointOffers){
 
     <h4 class="visually-hidden">Offers:</h4>
       <ul class="event__selected-offers">
-      ${pointOffers.map((e)=> (
+      ${pointOffers.map((item)=> (
     `<li class="event__offer">
-      <span class="event__offer-title">${e.title}</span>
+      <span class="event__offer-title">${item.title}</span>
       &plus;&euro;&nbsp;
-      <span class="event__offer-price">${e.price}</span>
+      <span class="event__offer-price">${item.price}</span>
     </li>`
   )).join('')}
       </ul>
@@ -43,7 +44,8 @@ export function createPointTemplite(point, pointDestination, pointOffers){
       <span class="visually-hidden">Open event</span>
     </button>
   </div>
-</li>`;
-
+</li>
+`;
 }
+
 

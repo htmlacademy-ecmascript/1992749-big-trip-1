@@ -1,6 +1,4 @@
-
-
-const mockDestinations = [
+export const mockDestinations = [
   {
     'id': '1378c813-4b3b-4251-95b9-5dc2830be376',
     'name': 'Chamonix',
@@ -845,7 +843,5 @@ const mockDestinations = [
       }
     ]
   }
-]; // 28 units
-// название города и фотографии — для пункта назначения
-export const generateDestination = () => mockDestinations;
+];
 
