@@ -1,13 +1,13 @@
-import ListPresenter from './presenter/presenter-list.js';
-import { mockDestinations } from './mock/mock-destinations.js';
-import { mockOffers } from './mock/mock-offers.js';
-import DestinationsModel from './model/model-destinations.js';
-import OffersModel from './model/model-offers.js';
-import PointsModel from './model/model-points.js';
+import ListPresenter from './presenter/list-presenter.js';
+import { mockDestinations } from './mock/destinations-mock.js';
+import { mockOffers } from './mock/offers-mock.js';
+import DestinationsModel from './model/destinations-model.js';
+import OffersModel from './model/offers-model.js';
+import PointsModel from './model/points-model.js';
 
 const tripEventsContainer = document.querySelector('.trip-events');
 
-import { mockPoints } from './mock/mock-points.js';
+import { mockPoints } from './mock/points-mock.js';
 
 const destinationsModel = new DestinationsModel(mockDestinations);
 const offersModel = new OffersModel(mockOffers);
@@ -22,4 +22,3 @@ const listPresenter = new ListPresenter({
 
 
 listPresenter.init();
-

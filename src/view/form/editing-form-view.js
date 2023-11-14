@@ -1,5 +1,5 @@
 import { createElement } from '../../render.js';
-import { createFormTemplate } from './template-editing-form.js';
+import { createFormTemplate } from './editing-form-template.js';
 
 export default class EditingFormView{
   constructor(point, pointDestination, pointOffers, arrayDestinationsModel){

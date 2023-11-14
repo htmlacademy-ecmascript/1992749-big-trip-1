@@ -1,7 +1,17 @@
 import { formatStringToTime, formatStringToShortDate, getPointDuration } from '../../utils.js';
 
+function showOffers (pointOffers, offers) {
+  return pointOffers.map((item) => item.id === offers.find((elem) => elem === item.id) ? (
+    `<li class="event__offer">
+      <span class="event__offer-title">${item.title}</span>
+      &plus;&euro;&nbsp;
+      <span class="event__offer-price">${item.price}</span>
+    </li>`
+  ) : '').join('');
+}
+
 export function createPointTemplite(point, pointDestination, pointOffers){
-  const { basePrice, type, isFavorite, dateFrom, dateTo} = point;
+  const { basePrice, type, isFavorite, dateFrom, dateTo, offers} = point;
   const { name} = pointDestination;
   return `<li class="trip-events__item"> 
 
@@ -25,13 +35,7 @@ export function createPointTemplite(point, pointDestination, pointOffers){
 
     <h4 class="visually-hidden">Offers:</h4>
       <ul class="event__selected-offers">
-      ${pointOffers.map((item)=> (
-    `<li class="event__offer">
-      <span class="event__offer-title">${item.title}</span>
-      &plus;&euro;&nbsp;
-      <span class="event__offer-price">${item.price}</span>
-    </li>`
-  )).join('')}
+      ${showOffers(pointOffers, offers)}
       </ul>
 
     <button class="event__favorite-btn ${isFavorite ? 'event__favorite-btn--active' : ''}" type="button">
@@ -47,5 +51,4 @@ export function createPointTemplite(point, pointDestination, pointOffers){
 </li>
 `;
 }
-
 
