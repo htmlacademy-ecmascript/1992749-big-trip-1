@@ -1,18 +1,18 @@
 import{formatSrtingToDateTime, capitalize } from '../../utils.js';
 import { TYPES } from '../../const.js';
 
-function showType(types, type) {
+function showType(types, activeType) {
   return types.map((item) => (` <div class="event__type-item">
-  <input ${type === item ? 'checked' : ''} id="event-type-${item}-1" class="event__type-input  visually-hidden" type="radio" 
+  <input ${activeType === item ? 'checked' : ''} id="event-type-${item}-1" class="event__type-input  visually-hidden" type="radio" 
   name="event-type" value="${item}" >
   <label class="event__type-label  event__type-label--${item}" for="event-type-${item}-1">${capitalize(item)}</label>
 </div>`)).join('');
 }
 
-function showOffers(pointOffers, offers) {
-  return pointOffers.map((item) => (`<div class="event__offer-selector">
+function showOffers(offersByType, selectedOffers) {
+  return offersByType.map((item) => (`<div class="event__offer-selector">
   <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1" type="checkbox" name="event-offer-seats" 
-  ${offers.find((elem) => elem === item.id) ? 'checked' : ''}>
+  ${selectedOffers.find((elem) => elem === item.id) ? 'checked' : ''}>
   <label class="event__offer-label" for="event-offer-seats-1">
     <span class="event__offer-title">${item.title}</span>
     &plus;&euro;&nbsp;
@@ -29,9 +29,9 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate(point, pointDestination, pointOffers, arrayDestinationsModel){
+export function createFormTemplate({point, pointDestination, pointOffers, arrayDestinationsModel}){
   const {basePrice, type, dateFrom, dateTo, offers} = point;
-  const {description, pictures} = pointDestination;
+  const {description, pictures, name} = pointDestination;
   return `<form class="event event--edit" action="#" method="post">
  <header class="event__header">
    <div class="event__type-wrapper">
@@ -55,7 +55,7 @@ export function createFormTemplate(point, pointDestination, pointOffers, arrayDe
    <div class="event__field-group  event__field-group--destination">
      <label class="event__label  event__type-output" for="event-destination-1">${type}</label>
      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" 
-     placeholder="Chamonix" value="" list="destination-list-1">
+     placeholder="Chamonix" value="${name}" list="destination-list-1">
      <datalist id="destination-list-1">
 
        ${destinationList(arrayDestinationsModel)}
@@ -82,7 +82,9 @@ export function createFormTemplate(point, pointDestination, pointOffers, arrayDe
    </div>
 
    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-   <button class="event__reset-btn" type="reset">Cancel</button>
+   <button class="event__reset-btn" type="reset">Delete</button>
+   <button class="event__rollup-btn" type="button">
+     <span class="visually-hidden">Open event</span>
  </header>
  
  <section class="event__details">
