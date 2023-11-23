@@ -28,7 +28,6 @@ export const formatStringToShortDate = (inputDate) =>//месяц день ма�
 export const formatStringToTime = (inputDate) =>// часы/минуты
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.watchMinute) : '';
 
-
 export const getPointDuration = (dateFrom, dateTo) => {//время нахождения в точке
   const timeDiff = dayjs(dateTo).diff(dayjs(dateFrom));
   let pointDuration = 0;
@@ -46,8 +45,16 @@ export const getPointDuration = (dateFrom, dateTo) => {//время нахожд
   return pointDuration;
 };
 
-export function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
+export function isPointFuture(point) {
+  return dayjs().isBefore(point.dateFrom);
+}
+
+export function isPointPresent(point) {
+  return dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
+}
+
+export function isPointPast(point) {
+  return dayjs().isAfter(point.dateTo);
 }
 
 export function capitalize(string) {
