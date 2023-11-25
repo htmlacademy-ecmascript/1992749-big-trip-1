@@ -1,19 +1,24 @@
 import { render } from '../framework/render.js';
-import SortView, {tripEventsContainer} from '../view/sort-view.js';
+import SortView from '../view/sort-view.js';
 import EditingFormView from '../view/form/editing-form-view.js';
 import PointsContainerView from '../view/points-container-view.js';
 import PointView from '../view/point/point-viewt.js';
 import { replace } from '../framework/render.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 
+
 export default class ListPresenter {
+  #container = null;
   #pointsModel = null;
   #destinationsModel = null;
   #offersModel = null;
 
-  pointsContainerView = new PointsContainerView();
+  #sortComponent = new SortView();
+  #pointListEmptyComponent = new PointListEmptyView();
+  #pointsContainerComponent = new PointsContainerView();
 
-  constructor ({pointsModel, destinationsModel, offersModel}) {
+  constructor ({container, pointsModel, destinationsModel, offersModel}) {
+    this.#container = container;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
@@ -22,14 +27,14 @@ export default class ListPresenter {
   init() {
 
     if (this.#pointsModel.points.length) {
-      render(new SortView(), tripEventsContainer);
-      render(this.pointsContainerView, tripEventsContainer);
+      this.#renderSort();
+      this.#renderPointsContainer();
 
       for (let i = 0; i < this.#pointsModel.points.length; i++) {
         this.#renderPoint(this.#pointsModel.points[i]);
       }
     } else {
-      render(new PointListEmptyView(), tripEventsContainer);
+      this.#renderPointListEmpty();
     }
   }
 
@@ -78,9 +83,20 @@ export default class ListPresenter {
       document.removeEventListener('keydown', escKeyDownHandler);
     }
 
-    render(pointComponent, this.pointsContainerView.element);
+    render(pointComponent, this.#pointsContainerComponent.element);
+  }
+
+  #renderSort() {
+    render(this.#sortComponent, this.#container);
+  }
+
+  #renderPointListEmpty() {
+    render(this.#pointListEmptyComponent, this.#container);
+  }
+
+  #renderPointsContainer() {
+    render(this.#pointsContainerComponent, this.#container);
   }
 
 }
-
 
