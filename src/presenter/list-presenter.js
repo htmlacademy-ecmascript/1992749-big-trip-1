@@ -3,6 +3,7 @@ import SortView from '../view/sort-view.js';
 import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
+import { updateItem } from '../utils/common.js';
 
 export default class ListPresenter {
   #container = null;
@@ -14,6 +15,7 @@ export default class ListPresenter {
   #pointListEmptyComponent = new PointListEmptyView();
   #pointsContainerComponent = new PointsContainerView();
 
+  #listPoints = [];
   #pointPresenters = new Map();
 
   constructor ({container, pointsModel, destinationsModel, offersModel}) {
@@ -24,13 +26,14 @@ export default class ListPresenter {
   }
 
   init() {
+    this.#listPoints = [...this.#pointsModel.points];
 
-    if (this.#pointsModel.points.length) {
+    if (this.#listPoints.length) {
       this.#renderSort();
       this.#renderPointsContainer();
 
-      for (let i = 0; i < this.#pointsModel.points.length; i++) {
-        this.#renderPoint(this.#pointsModel.points[i]);
+      for (let i = 0; i < this.#listPoints.length; i++) {
+        this.#renderPoint(this.#listPoints[i]);
       }
     } else {
       this.#renderPointListEmpty();
@@ -48,7 +51,12 @@ export default class ListPresenter {
     this.#pointPresenters.set(point.id, pointPresenter);
   }
 
-  #clearTaskList() {
+  #handlePointChange = (updatedPoint) => {
+    this.#listPoints = updateItem(this.#listPoints, updatedPoint);
+    this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
+  };
+
+  #clearPointList() {
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
   }
