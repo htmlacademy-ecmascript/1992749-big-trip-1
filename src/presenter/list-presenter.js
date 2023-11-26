@@ -45,6 +45,7 @@ export default class ListPresenter {
       pointsContainer: this.#pointsContainerComponent.element,
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel,
+      onDataChange: this.#handlePointChange,
     });
     pointPresenter.init(point);
 
