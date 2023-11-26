@@ -48,7 +48,7 @@ export default class PointPresenter {
     replace(this.#pointComponent, this.#editingFormComponent);
   }
 
-  #escKeyDownHandler (evt) {
+  #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       this.#replaceFormToPoint();
@@ -61,25 +61,15 @@ export default class PointPresenter {
     document.addEventListener('keydown', this.#escKeyDownHandler);
   };
 
-  #rollupButtonClickHandler () {
+  #rollupButtonClickHandler = () => {
     this.#replaceFormToPoint();
     document.removeEventListener('keydown', this.#escKeyDownHandler);
-  }
+  };
 
-  #pointSubmitHandler () {
+  #pointSubmitHandler = () => {
     this.#replaceFormToPoint();
     document.removeEventListener('keydown', this.#escKeyDownHandler);
-  }
+  };
 
 }
-
-
-// #renderPoint(point) {
-//   const pointPresenter = new PointPresenter({
-//     pointsContainer: this.#pointsContainerComponent.element,
-//     destinationsModel: this.#destinationsModel,
-//     offersModel: this.#offersModel,
-//   });
-//   pointPresenter.init(point);
-// }
 
