@@ -1,6 +1,6 @@
 import PointView from '../view/point/point-viewt';
 import EditingFormView from '../view/form/editing-form-view';
-import { render, replace } from '../framework/render';
+import { render, replace, remove } from '../framework/render';
 
 export default class PointPresenter {
   #pointsContainer = null;
@@ -21,6 +21,9 @@ export default class PointPresenter {
   init(point) {
     this.#point = point;
 
+    const prevPointComponent = this.#pointComponent;
+    const prevEditingFormComponent = this.#editingFormComponent;
+
     this.#pointComponent = new PointView({
       point,
       pointDestination: this.#destinationsModel.getById(point.destination),
@@ -37,7 +40,26 @@ export default class PointPresenter {
       onSubmitClick: this.#pointSubmitHandler,
     });
 
-    render(this.#pointComponent, this.#pointsContainer);
+    if (prevPointComponent === null || prevEditingFormComponent === null) {
+      render(this.#pointComponent, this.#pointsContainer);
+      return;
+    }
+
+    if (this.#pointsContainer.contains(prevPointComponent.element)) {
+      replace(this.#pointComponent, prevPointComponent);
+    }
+
+    if (this.#pointsContainer.contains(prevEditingFormComponent.element)) {
+      replace(this.#editingFormComponent, prevEditingFormComponent);
+    }
+
+    remove(prevPointComponent);
+    remove(prevEditingFormComponent);
+  }
+
+  destroy() {
+    remove(this.#pointComponent);
+    remove(this.#editingFormComponent);
   }
 
   #replacePointToForm () {
@@ -54,7 +76,7 @@ export default class PointPresenter {
       this.#replaceFormToPoint();
       document.removeEventListener('keydown', this.#escKeyDownHandler);
     }
-  }
+  };
 
   #pointEditClickHandler = () => {
     this.#replacePointToForm();
