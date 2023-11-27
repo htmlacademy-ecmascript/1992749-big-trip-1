@@ -46,11 +46,16 @@ export default class ListPresenter {
       destinationsModel: this.#destinationsModel,
       offersModel: this.#offersModel,
       onDataChange: this.#handlePointChange,
+      onModeChange: this.#handleModeChange,
     });
     pointPresenter.init(point);
 
     this.#pointPresenters.set(point.id, pointPresenter);
   }
+
+  #handleModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  };
 
   #handlePointChange = (updatedPoint) => {
     this.#listPoints = updateItem(this.#listPoints, updatedPoint);

@@ -2,22 +2,29 @@ import PointView from '../view/point/point-viewt';
 import EditingFormView from '../view/form/editing-form-view';
 import { render, replace, remove } from '../framework/render';
 
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING',
+};
 export default class PointPresenter {
   #pointsContainer = null;
   #destinationsModel = null;
   #offersModel = null;
   #handleDataChange = null;
+  #handleModeChange = null;
 
   #pointComponent = null;
   #editingFormComponent = null;
 
   #point = null;
+  #mode = Mode.DEFAULT;
 
-  constructor({pointsContainer, destinationsModel, offersModel, onDataChange}) {
+  constructor({pointsContainer, destinationsModel, offersModel, onDataChange, onModeChange}) {
     this.#pointsContainer = pointsContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#handleDataChange = onDataChange;
+    this.#handleModeChange = onModeChange;
   }
 
   init(point) {
@@ -48,11 +55,11 @@ export default class PointPresenter {
       return;
     }
 
-    if (this.#pointsContainer.contains(prevPointComponent.element)) {
+    if (this.#mode === Mode.DEFAULT) {
       replace(this.#pointComponent, prevPointComponent);
     }
 
-    if (this.#pointsContainer.contains(prevEditingFormComponent.element)) {
+    if (this.#mode === Mode.EDITING) {
       replace(this.#editingFormComponent, prevEditingFormComponent);
     }
 
@@ -65,12 +72,21 @@ export default class PointPresenter {
     remove(this.#editingFormComponent);
   }
 
+  resetView() {
+    if (this.#mode !== Mode.DEFAULT) {
+      this.#replaceFormToPoint();
+    }
+  }
+
   #replacePointToForm () {
     replace(this.#editingFormComponent, this.#pointComponent);
+    this.#handleModeChange();
+    this.#mode = Mode.EDITING;
   }
 
   #replaceFormToPoint () {
     replace(this.#pointComponent, this.#editingFormComponent);
+    this.#mode = Mode.DEFAULT;
   }
 
   #escKeyDownHandler = (evt) => {
