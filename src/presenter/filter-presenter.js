@@ -15,7 +15,7 @@ export default class FilterPresenter {
   }
 
   init() {
-    render(new FilterView(this.#filters), this.#container);
+    render(new FilterView({filters: this.#filters}), this.#container);
   }
 }
 

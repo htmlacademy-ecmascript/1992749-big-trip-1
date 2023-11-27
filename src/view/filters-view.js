@@ -22,7 +22,6 @@ function createFilterTemplate(filterItems){
 
   const filterItemsTemplite = filterItems
     .map((filter) => createFilterItemTemplite(filter)).join('');
-    //.map((filter, index) => createFilterItemTemplite(filter, index === 0)).join('');
   return(
     `<form class="trip-filters" action="#" method="get">
         ${filterItemsTemplite}
@@ -34,7 +33,7 @@ function createFilterTemplate(filterItems){
 export default class FilterView extends AbstractView {
   #filters = null;
 
-  constructor(filters){
+  constructor({filters}){
     super();
     this.#filters = filters;
   }
