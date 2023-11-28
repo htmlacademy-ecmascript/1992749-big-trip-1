@@ -60,3 +60,33 @@ export function isPointPast(point) {
 export function capitalize(string) {
   return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
+
+// Функция помещает задачи без даты в конце списка,
+// возвращая нужный вес для колбэка sort
+export function getWeightForNullDate(dateA, dateB) {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+}
+
+export function sortTaskUp(taskA, taskB) {
+  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+
+  return weight ?? dayjs(taskA.dueDate).diff(dayjs(taskB.dueDate));
+}
+
+export function sortTaskDown(taskA, taskB) {
+  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+
+  return weight ?? dayjs(taskB.dueDate).diff(dayjs(taskA.dueDate));
+}
