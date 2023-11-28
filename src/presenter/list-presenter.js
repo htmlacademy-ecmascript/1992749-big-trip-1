@@ -11,7 +11,7 @@ export default class ListPresenter {
   #destinationsModel = null;
   #offersModel = null;
 
-  #sortComponent = new SortView();
+  #sortComponent = null;
   #pointListEmptyComponent = new PointListEmptyView();
   #pointsContainerComponent = new PointsContainerView();
 
@@ -67,7 +67,16 @@ export default class ListPresenter {
     this.#pointPresenters.clear();
   }
 
+  #handleSortTypeChange = (sortType) => {
+    // - Сортируем задачи
+    // - Очищаем список
+    // - Рендерим список заново
+  };
+
   #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange
+    });
     render(this.#sortComponent, this.#container);
   }
 
