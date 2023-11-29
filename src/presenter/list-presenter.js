@@ -82,10 +82,16 @@ export default class ListPresenter {
     // потому что для сортировки мы будем мутировать
     // массив в свойстве _boardTasks
     switch (sortType) {
-      case SortType.DATE_UP:
+      case SortType.PRICE:
         this.#listPoints.sort(sortTaskUp);
         break;
-      case SortType.DATE_DOWN:
+      case SortType.TIME:
+        this.#listPoints.sort(sortTaskDown);
+        break;
+      case SortType.EVENT:
+        this.#listPoints.sort(sortTaskDown);
+        break;
+      case SortType.OFFER:
         this.#listPoints.sort(sortTaskDown);
         break;
       default:
@@ -103,7 +109,7 @@ export default class ListPresenter {
     }
 
     this.#sortTasks(sortType);
-    // - Очищаем список
+    this.#clearPointList(); // - Очищаем список
     // - Рендерим список заново
   };
 
@@ -123,4 +129,5 @@ export default class ListPresenter {
   }
 
 }
+
 

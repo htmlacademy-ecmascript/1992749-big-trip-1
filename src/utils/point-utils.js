@@ -80,13 +80,13 @@ export function getWeightForNullDate(dateA, dateB) {
 }
 
 export function sortTaskUp(taskA, taskB) {
-  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+  const weight = getWeightForNullDate(taskA.dateTo, taskB.dateTo);
 
-  return weight ?? dayjs(taskA.dueDate).diff(dayjs(taskB.dueDate));
+  return weight ?? dayjs(taskA.dateTo).diff(dayjs(taskB.dateTo));
 }
 
 export function sortTaskDown(taskA, taskB) {
-  const weight = getWeightForNullDate(taskA.dueDate, taskB.dueDate);
+  const weight = getWeightForNullDate(taskA.dateTo, taskB.dateTo);
 
-  return weight ?? dayjs(taskB.dueDate).diff(dayjs(taskA.dueDate));
+  return weight ?? dayjs(taskB.dateTo).diff(dayjs(taskA.dateTo));
 }
