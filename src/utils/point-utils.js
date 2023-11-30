@@ -60,3 +60,17 @@ export function isPointPast(point) {
 export function capitalize(string) {
   return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
+
+export const getPointsPriceDifference = (pointA, pointB) =>{
+  const pointAPrice = pointA.basePrice;
+  const pointBPrice = pointB.basePrice;
+  return pointBPrice - pointAPrice;
+};
+
+export const getPointsTimeDifference = (pointA, pointB) =>{
+  const pointADuration = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
+  const pointBDuration = dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom));
+
+  return pointBDuration - pointADuration;
+};
+

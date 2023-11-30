@@ -4,6 +4,8 @@ import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/common.js';
+import { SortType } from '../const.js';
+import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
 
 export default class ListPresenter {
   #container = null;
@@ -11,12 +13,14 @@ export default class ListPresenter {
   #destinationsModel = null;
   #offersModel = null;
 
-  #sortComponent = new SortView();
+  #sortComponent = null;
   #pointListEmptyComponent = new PointListEmptyView();
   #pointsContainerComponent = new PointsContainerView();
 
   #listPoints = [];
   #pointPresenters = new Map();
+  #currentSortType = SortType.DAY;
+  #sourcedListPoints = [];
 
   constructor ({container, pointsModel, destinationsModel, offersModel}) {
     this.#container = container;
@@ -27,14 +31,12 @@ export default class ListPresenter {
 
   init() {
     this.#listPoints = [...this.#pointsModel.points];
+    this.#sourcedListPoints = [...this.#pointsModel.points]; // сохраним исходный массив
 
     if (this.#listPoints.length) {
       this.#renderSort();
       this.#renderPointsContainer();
-
-      for (let i = 0; i < this.#listPoints.length; i++) {
-        this.#renderPoint(this.#listPoints[i]);
-      }
+      this.#renderPoints();
     } else {
       this.#renderPointListEmpty();
     }
@@ -59,6 +61,7 @@ export default class ListPresenter {
 
   #handlePointChange = (updatedPoint) => {
     this.#listPoints = updateItem(this.#listPoints, updatedPoint);
+    this.#sourcedListPoints = updateItem(this.#sourcedListPoints, updatedPoint);
     this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
   };
 
@@ -67,7 +70,36 @@ export default class ListPresenter {
     this.#pointPresenters.clear();
   }
 
+  #sortTasks(sortType) {
+
+    switch (sortType) {
+      case SortType.PRICE:
+        this.#listPoints.sort(getPointsPriceDifference);
+        break;
+      case SortType.TIME:
+        this.#listPoints.sort(getPointsTimeDifference);
+        break;
+      default:
+        this.#listPoints = [...this.#sourcedListPoints];
+    }
+
+    this.#currentSortType = sortType;
+  }
+
+  #handleSortTypeChange = (sortType) => {
+    if (this.#currentSortType === sortType) {
+      return;
+    }
+
+    this.#sortTasks(sortType);
+    this.#clearPointList();
+    this.#renderPoints();
+  };
+
   #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange
+    });
     render(this.#sortComponent, this.#container);
   }
 
@@ -79,5 +111,12 @@ export default class ListPresenter {
     render(this.#pointsContainerComponent, this.#container);
   }
 
+  #renderPoints() {
+    for (let i = 0; i < this.#listPoints.length; i++) {
+      this.#renderPoint(this.#listPoints[i]);
+    }
+  }
+
 }
+
 
