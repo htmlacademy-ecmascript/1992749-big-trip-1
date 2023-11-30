@@ -5,7 +5,7 @@ import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
 import { updateItem } from '../utils/common.js';
 import { SortType } from '../const.js';
-import { sortTaskDown, sortTaskUp } from '../utils/point-utils.js';
+import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
 
 export default class ListPresenter {
   #container = null;
@@ -31,19 +31,12 @@ export default class ListPresenter {
 
   init() {
     this.#listPoints = [...this.#pointsModel.points];
-
-    // 1. В отличии от сортировки по любому параметру,
-    // исходный порядок можно сохранить только одним способом -
-    // сохранив исходный массив:
-    this.#sourcedListPoints = [...this.#pointsModel.points];
+    this.#sourcedListPoints = [...this.#pointsModel.points]; // сохраним исходный массив
 
     if (this.#listPoints.length) {
       this.#renderSort();
       this.#renderPointsContainer();
-
-      for (let i = 0; i < this.#listPoints.length; i++) {
-        this.#renderPoint(this.#listPoints[i]);
-      }
+      this.#renderPoints();
     } else {
       this.#renderPointListEmpty();
     }
@@ -78,25 +71,15 @@ export default class ListPresenter {
   }
 
   #sortTasks(sortType) {
-    // 2. Этот исходный массив задач необходим,
-    // потому что для сортировки мы будем мутировать
-    // массив в свойстве _boardTasks
+
     switch (sortType) {
       case SortType.PRICE:
-        this.#listPoints.sort(sortTaskUp);
+        this.#listPoints.sort(getPointsPriceDifference);
         break;
       case SortType.TIME:
-        this.#listPoints.sort(sortTaskDown);
-        break;
-      case SortType.EVENT:
-        this.#listPoints.sort(sortTaskDown);
-        break;
-      case SortType.OFFER:
-        this.#listPoints.sort(sortTaskDown);
+        this.#listPoints.sort(getPointsTimeDifference);
         break;
       default:
-        // 3. А когда пользователь захочет "вернуть всё, как было",
-        // мы просто запишем в _boardTasks исходный массив
         this.#listPoints = [...this.#sourcedListPoints];
     }
 
@@ -109,8 +92,8 @@ export default class ListPresenter {
     }
 
     this.#sortTasks(sortType);
-    this.#clearPointList(); // - Очищаем список
-    // - Рендерим список заново
+    this.#clearPointList();
+    this.#renderPoints();
   };
 
   #renderSort() {
@@ -126,6 +109,12 @@ export default class ListPresenter {
 
   #renderPointsContainer() {
     render(this.#pointsContainerComponent, this.#container);
+  }
+
+  #renderPoints() {
+    for (let i = 0; i < this.#listPoints.length; i++) {
+      this.#renderPoint(this.#listPoints[i]);
+    }
   }
 
 }

@@ -61,32 +61,16 @@ export function capitalize(string) {
   return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
 
-// Функция помещает задачи без даты в конце списка,
-// возвращая нужный вес для колбэка sort
-export function getWeightForNullDate(dateA, dateB) {
-  if (dateA === null && dateB === null) {
-    return 0;
-  }
+export const getPointsPriceDifference = (pointA, pointB) =>{
+  const pointAPrice = pointA.basePrice;
+  const pointBPrice = pointB.basePrice;
+  return pointBPrice - pointAPrice;
+};
 
-  if (dateA === null) {
-    return 1;
-  }
+export const getPointsTimeDifference = (pointA, pointB) =>{
+  const pointADuration = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
+  const pointBDuration = dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom));
 
-  if (dateB === null) {
-    return -1;
-  }
+  return pointBDuration - pointADuration;
+};
 
-  return null;
-}
-
-export function sortTaskUp(taskA, taskB) {
-  const weight = getWeightForNullDate(taskA.dateTo, taskB.dateTo);
-
-  return weight ?? dayjs(taskA.dateTo).diff(dayjs(taskB.dateTo));
-}
-
-export function sortTaskDown(taskA, taskB) {
-  const weight = getWeightForNullDate(taskA.dateTo, taskB.dateTo);
-
-  return weight ?? dayjs(taskB.dateTo).diff(dayjs(taskA.dateTo));
-}
