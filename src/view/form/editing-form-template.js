@@ -29,7 +29,8 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({point, pointDestination, pointOffers, arrayDestinationsModel}){
+export function createFormTemplate({state, pointDestination, pointOffers, arrayDestinationsModel}){
+  const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   const {description, pictures, name} = pointDestination;
   return `<form class="event event--edit" action="#" method="post">

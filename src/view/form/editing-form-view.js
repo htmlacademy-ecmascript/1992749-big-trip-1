@@ -1,7 +1,7 @@
-import AbstractView from '../../framework/view/abstract-view.js';
+import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 import { createFormTemplate } from './editing-form-template.js';
 
-export default class EditingFormView extends AbstractView {
+export default class EditingFormView extends AbstractStatefulView {
   #point = null;
   #pointDestination = null;
   #pointOffers = null;
@@ -11,7 +11,7 @@ export default class EditingFormView extends AbstractView {
 
   constructor({point, pointDestination, pointOffers, arrayDestinationsModel, onRollupClick, onSubmitClick}){
     super();
-    this.#point = point;
+    this._setState(EditingFormView.parsePointToState({point}));
     this.#pointDestination = pointDestination;
     this.#pointOffers = pointOffers;
     this.#arrayDestinationsModel = arrayDestinationsModel;
@@ -19,16 +19,26 @@ export default class EditingFormView extends AbstractView {
     this.#onSubmitClick = onSubmitClick;
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
+
+    this._restoreHandlers();
   }
 
   get template(){
     return createFormTemplate({
-      point: this.#point,
+      state: this._state,
       pointDestination: this.#pointDestination,
       pointOffers: this.#pointOffers,
       arrayDestinationsModel: this.#arrayDestinationsModel,
     });
   }
+
+  reset(point) {
+    this.updateElement({point});
+  }
+
+  _restoreHandlers = () => {
+
+  };
 
   #rollupButtonClickHandler = (evt) => {
     evt.preventDefault();
@@ -37,7 +47,16 @@ export default class EditingFormView extends AbstractView {
 
   #pointSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#onSubmitClick(this.#point);
+    this.#onSubmitClick(EditingFormView.parseStateToPoint(this._state));
   };
+
+  static parsePointToState({point}) {
+    return {point};
+  }
+
+  static parseStateToPoint(state) {
+    return state.point;
+  }
+
 }
 
