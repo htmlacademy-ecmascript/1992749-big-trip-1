@@ -32,7 +32,8 @@ function destinationList(items) {
 export function createFormTemplate({state, pointDestination, pointOffers, arrayDestinationsModel}){
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
-  const {description, pictures, name} = pointDestination;
+  const currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
+  const {description, pictures, name} = currentDestination;
   return `<form class="event event--edit" action="#" method="post">
  <header class="event__header">
    <div class="event__type-wrapper">

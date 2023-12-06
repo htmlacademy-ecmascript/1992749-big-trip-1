@@ -17,8 +17,6 @@ export default class EditingFormView extends AbstractStatefulView {
     this.#arrayDestinationsModel = arrayDestinationsModel;
     this.#rollupClickHandler = onRollupClick;
     this.#onSubmitClick = onSubmitClick;
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
-    this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
 
     this._restoreHandlers();
   }
@@ -37,7 +35,22 @@ export default class EditingFormView extends AbstractStatefulView {
   }
 
   _restoreHandlers = () => {
+    this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
+    this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
+  };
 
+  #destinationChangeHandler = (evt) => {
+    evt.preventDefault();
+    const selectedDistination = this.#arrayDestinationsModel.find((elem) => elem.name === evt.target.value);
+    const selectedDistinationId = (selectedDistination) ? selectedDistination.id : null;
+
+    this.updateElement({
+      point:{
+        ...this._state.point,
+        destination:selectedDistinationId,
+      }
+    });
   };
 
   #rollupButtonClickHandler = (evt) => {
