@@ -11,7 +11,8 @@ function showType(types, activeType) {
 
 function showOffers(offersByType, selectedOffers) {
   return offersByType.map((item) => (`<div class="event__offer-selector">
-  <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1" type="checkbox" name="event-offer-seats" 
+  <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1"
+  data-offer-id="${item.id}" type="checkbox" name="event-offer-seats" 
   ${selectedOffers.find((elem) => elem === item.id) ? 'checked' : ''}>
   <label class="event__offer-label" for="event-offer-seats-1">
     <span class="event__offer-title">${item.title}</span>
@@ -29,7 +30,7 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({state, pointDestination, pointOffers, arrayDestinationsModel}){
+export function createFormTemplate({state, pointOffers, arrayDestinationsModel}){ // pointDestination убрал пока
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   const currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
@@ -80,7 +81,7 @@ export function createFormTemplate({state, pointDestination, pointOffers, arrayD
        <span class="visually-hidden">Price</span>
        &euro;
      </label>
-     <input class="event__input  event__input--${basePrice}" id="event-price-1" type="text" name="event-price" value="${basePrice}">
+     <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
    </div>
 
    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>

@@ -35,9 +35,35 @@ export default class EditingFormView extends AbstractStatefulView {
   }
 
   _restoreHandlers = () => {
-    this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
+    this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);//
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);//
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
+    //this.element.querySelector('form').addEventListener('submit', this.#pointSubmitHandler);
+    this.element.querySelector('.event__input--price').addEventListener('change',this.#priceChangeHandler);//
+    this.element.querySelector('.event__type-group').addEventListener('change',this.#typeChangeHandler);//
+    this.element.querySelector('.event__available-offers').addEventListener('change',this.#offersChangeHandler);//
+  };
+
+  #typeChangeHandler = (evt) => {
+    evt.preventDefault();
+    this.updateElement({
+      point: {
+        ...this._state.point,
+        type:evt.target.value,
+        offers:[]
+      }
+    });
+  };
+
+  #offersChangeHandler = () => {
+    const checkedBoxes = Array.from(this.element.querySelectorAll('.event__offer-checkbox:checked'));
+
+    this._setState({
+      point: {
+        ...this._state.point,
+        offers:checkedBoxes.map((element) => element.dataset.offerId)
+      }
+    });
   };
 
   #destinationChangeHandler = (evt) => {
@@ -46,7 +72,7 @@ export default class EditingFormView extends AbstractStatefulView {
     const selectedDistinationId = (selectedDistination) ? selectedDistination.id : null;
 
     this.updateElement({
-      point:{
+      point: {
         ...this._state.point,
         destination:selectedDistinationId,
       }
@@ -61,6 +87,15 @@ export default class EditingFormView extends AbstractStatefulView {
   #pointSubmitHandler = (evt) => {
     evt.preventDefault();
     this.#onSubmitClick(EditingFormView.parseStateToPoint(this._state));
+  };
+
+  #priceChangeHandler = (evt) => {
+    this._setState({
+      point: {
+        ...this._state.point,
+        basePrice:Number(evt.target.value)
+      }
+    });
   };
 
   static parsePointToState({point}) {
