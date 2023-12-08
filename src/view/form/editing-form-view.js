@@ -4,16 +4,16 @@ import { createFormTemplate } from './editing-form-template.js';
 export default class EditingFormView extends AbstractStatefulView {
   #point = null;
   #pointDestination = null;
-  #pointOffers = null;
+  #arrayOffers = null;
   #arrayDestinationsModel = null;
   #rollupClickHandler = null;
   #onSubmitClick = null;
 
-  constructor({point, pointDestination, pointOffers, arrayDestinationsModel, onRollupClick, onSubmitClick}){
+  constructor({point, pointDestination, arrayOffers, arrayDestinationsModel, onRollupClick, onSubmitClick}){
     super();
     this._setState(EditingFormView.parsePointToState({point}));
     this.#pointDestination = pointDestination;
-    this.#pointOffers = pointOffers;
+    this.#arrayOffers = arrayOffers;
     this.#arrayDestinationsModel = arrayDestinationsModel;
     this.#rollupClickHandler = onRollupClick;
     this.#onSubmitClick = onSubmitClick;
@@ -25,7 +25,7 @@ export default class EditingFormView extends AbstractStatefulView {
     return createFormTemplate({
       state: this._state,
       pointDestination: this.#pointDestination,
-      pointOffers: this.#pointOffers,
+      arrayOffers: this.#arrayOffers,
       arrayDestinationsModel: this.#arrayDestinationsModel,
     });
   }
@@ -38,7 +38,6 @@ export default class EditingFormView extends AbstractStatefulView {
     this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);//
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);//
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
-    //this.element.querySelector('form').addEventListener('submit', this.#pointSubmitHandler);
     this.element.querySelector('.event__input--price').addEventListener('change',this.#priceChangeHandler);//
     this.element.querySelector('.event__type-group').addEventListener('change',this.#typeChangeHandler);//
     this.element.querySelector('.event__available-offers').addEventListener('change',this.#offersChangeHandler);//
@@ -50,7 +49,7 @@ export default class EditingFormView extends AbstractStatefulView {
       point: {
         ...this._state.point,
         type:evt.target.value,
-        offers:[]
+        offers: [],
       }
     });
   };

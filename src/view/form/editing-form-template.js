@@ -9,12 +9,14 @@ function showType(types, activeType) {
 </div>`)).join('');
 }
 
-function showOffers(offersByType, selectedOffers) {
+function showOffers(arrayOffers, selectedOffers, type) {
+  const offersByType = arrayOffers.find((elem) => elem.type === type).offers;
+
   return offersByType.map((item) => (`<div class="event__offer-selector">
-  <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1"
+  <input class="event__offer-checkbox  visually-hidden" id="event-offer-${item.id}"
   data-offer-id="${item.id}" type="checkbox" name="event-offer-seats" 
   ${selectedOffers.find((elem) => elem === item.id) ? 'checked' : ''}>
-  <label class="event__offer-label" for="event-offer-seats-1">
+  <label class="event__offer-label" for="event-offer-${item.id}">
     <span class="event__offer-title">${item.title}</span>
     &plus;&euro;&nbsp;
     <span class="event__offer-price">${item.price}</span>
@@ -30,10 +32,13 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({state, pointOffers, arrayDestinationsModel}){ // pointDestination убрал пока
+export function createFormTemplate({state, arrayOffers, arrayDestinationsModel}){// pointDestination
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   const currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
+  // if (currentDestination === undefined) {
+  //   currentDestination = pointDestination;
+  // }
   const {description, pictures, name} = currentDestination;
   return `<form class="event event--edit" action="#" method="post">
  <header class="event__header">
@@ -96,7 +101,9 @@ export function createFormTemplate({state, pointOffers, arrayDestinationsModel})
  <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
  <div class="event__available-offers">
- ${showOffers(pointOffers, offers)}
+
+${showOffers(arrayOffers, offers, type)}
+ 
  </div>
 </section>
 
