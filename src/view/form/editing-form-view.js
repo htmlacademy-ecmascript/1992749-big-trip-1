@@ -69,7 +69,9 @@ export default class EditingFormView extends AbstractStatefulView {
     evt.preventDefault();
     const selectedDistination = this.#arrayDestinationsModel.find((elem) => elem.name === evt.target.value);
     const selectedDistinationId = (selectedDistination) ? selectedDistination.id : null;
-
+    if (selectedDistination === undefined) {
+      return;
+    }
     this.updateElement({
       point: {
         ...this._state.point,

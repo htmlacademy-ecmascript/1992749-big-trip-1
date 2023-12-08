@@ -32,13 +32,13 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({state, arrayOffers, arrayDestinationsModel}){// pointDestination
+export function createFormTemplate({state, arrayOffers, arrayDestinationsModel, pointDestination}){// pointDestination
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
-  const currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
-  // if (currentDestination === undefined) {
-  //   currentDestination = pointDestination;
-  // }
+  let currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
+  if (currentDestination === undefined) {
+    currentDestination = pointDestination;
+  }
   const {description, pictures, name} = currentDestination;
   return `<form class="event event--edit" action="#" method="post">
  <header class="event__header">
