@@ -9,11 +9,14 @@ function showType(types, activeType) {
 </div>`)).join('');
 }
 
-function showOffers(offersByType, selectedOffers) {
+function showOffers(arrayOffers, selectedOffers, type) {
+  const offersByType = arrayOffers.find((elem) => elem.type === type).offers;
+
   return offersByType.map((item) => (`<div class="event__offer-selector">
-  <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1" type="checkbox" name="event-offer-seats" 
+  <input class="event__offer-checkbox  visually-hidden" id="event-offer-${item.id}"
+  data-offer-id="${item.id}" type="checkbox" name="event-offer-seats" 
   ${selectedOffers.find((elem) => elem === item.id) ? 'checked' : ''}>
-  <label class="event__offer-label" for="event-offer-seats-1">
+  <label class="event__offer-label" for="event-offer-${item.id}">
     <span class="event__offer-title">${item.title}</span>
     &plus;&euro;&nbsp;
     <span class="event__offer-price">${item.price}</span>
@@ -29,9 +32,14 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({point, pointDestination, pointOffers, arrayDestinationsModel}){
+export function createFormTemplate({state, arrayOffers, arrayDestinationsModel, pointDestination}){// pointDestination
+  const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
-  const {description, pictures, name} = pointDestination;
+  let currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
+  if (currentDestination === undefined) {
+    currentDestination = pointDestination;
+  }
+  const {description, pictures, name} = currentDestination;
   return `<form class="event event--edit" action="#" method="post">
  <header class="event__header">
    <div class="event__type-wrapper">
@@ -78,7 +86,7 @@ export function createFormTemplate({point, pointDestination, pointOffers, arrayD
        <span class="visually-hidden">Price</span>
        &euro;
      </label>
-     <input class="event__input  event__input--${basePrice}" id="event-price-1" type="text" name="event-price" value="${basePrice}">
+     <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
    </div>
 
    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
@@ -93,7 +101,9 @@ export function createFormTemplate({point, pointDestination, pointOffers, arrayD
  <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
  <div class="event__available-offers">
- ${showOffers(pointOffers, offers)}
+
+${showOffers(arrayOffers, offers, type)}
+ 
  </div>
 </section>
 
