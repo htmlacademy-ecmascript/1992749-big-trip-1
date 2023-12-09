@@ -9,8 +9,8 @@ function showType(types, activeType) {
 </div>`)).join('');
 }
 
-function showOffers(arrayOffers, selectedOffers, type) {
-  const offersByType = arrayOffers.find((elem) => elem.type === type).offers;
+function showOffers(offersModel, selectedOffers, type) {
+  const offersByType = offersModel.getByType(type);
 
   return offersByType.map((item) => (`<div class="event__offer-selector">
   <input class="event__offer-checkbox  visually-hidden" id="event-offer-${item.id}"
@@ -32,7 +32,7 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createFormTemplate({state, arrayOffers, arrayDestinationsModel, pointDestination}){// pointDestination
+export function createFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination}){// pointDestination
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   let currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
@@ -102,7 +102,7 @@ export function createFormTemplate({state, arrayOffers, arrayDestinationsModel, 
 
  <div class="event__available-offers">
 
-${showOffers(arrayOffers, offers, type)}
+${showOffers(offersModel, offers, type)}
  
  </div>
 </section>
