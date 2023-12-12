@@ -44,7 +44,7 @@ export default class PointPresenter {
     this.#editingFormComponent = new EditingFormView({
       point,
       pointDestination: this.#destinationsModel.getById(point.destination),
-      arrayOffers: this.#offersModel.offers,
+      offersModel: this.#offersModel,
       arrayDestinationsModel: this.#destinationsModel.destinations,
       onRollupClick: this.#rollupButtonClickHandler,
       onSubmitClick: this.#pointSubmitHandler,
