@@ -120,22 +120,21 @@ export default class EditingFormView extends AbstractStatefulView {
   };
 
   #dateFromChangeHandler = ([userDate]) => {
-    this._setState({
-      point:{
+    this.updateElement({
+      point: {
         ...this._state.point,
-        dateFrom:userDate
-      }});
-    this.#datePickerTo.set('minDate',this._state.point.dataFrom);
+        dateFrom: userDate
+      }
+    });
   };
 
   #dateToChangeHandler = ([userDate]) => {
-    this._setState({
-      point:{
+    this.updateElement({
+      point: {
         ...this._state.point,
-        dateTo:userDate
+        dateTo: userDate
       }
     });
-    this.#datePickerFrom.set('maxDate',this._state.point.dateTo);
   };
 
   #setDatepicker() {
@@ -151,14 +150,14 @@ export default class EditingFormView extends AbstractStatefulView {
     };
     this.#datePickerFrom = flatpickr(dateFromInput, {
       ...commonConfig,
-      defaultDate:this._state.point.dataFrom,
+      defaultDate:this._state.point.dateFrom,
       maxDate: this._state.point.dateTo,
       onChange: this.#dateFromChangeHandler,
     });
 
     this.#datePickerTo = flatpickr(dateToInput, {
       ...commonConfig,
-      defaultDate:this._state.point.dataTo,
+      defaultDate:this._state.point.dateTo,
       minDate: this._state.point.dateFrom,
       onChange: this.#dateToChangeHandler,
     });
