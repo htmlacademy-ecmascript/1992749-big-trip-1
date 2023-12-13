@@ -29,6 +29,10 @@ export default class ListPresenter {
     this.#offersModel = offersModel;
   }
 
+  get points() {
+    return this.#pointsModel.points;
+  }
+
   init() {
     this.#listPoints = [...this.#pointsModel.points];
     this.#sourcedListPoints = [...this.#pointsModel.points]; // сохраним исходный массив

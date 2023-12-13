@@ -1,5 +1,8 @@
-export default class PointsModel {
+import Observable from '../framework/observable';
+
+export default class PointsModel extends Observable{
   constructor(points) {
+    super();
     this.points = points;
   }
 
