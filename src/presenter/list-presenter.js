@@ -4,7 +4,7 @@ import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
 //import { updateItem } from '../utils/common.js';
-import { SortType } from '../const.js';
+import { SortType, UserAction, UpdateType } from '../const.js';
 import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
 
 export default class ListPresenter {
@@ -70,19 +70,34 @@ export default class ListPresenter {
   };
 
   #handleViewAction = (actionType, updateType, update) => {
-    console.log(actionType, updateType, update);
-    // Здесь будем вызывать обновление модели.
-    // actionType - действие пользователя, нужно чтобы понять, какой метод модели вызвать
-    // updateType - тип изменений, нужно чтобы понять, что после нужно обновить
-    // update - обновленные данные
+    switch (actionType) {
+      case UserAction.UPDATE_POINT:
+        this.#pointsModel.updatePoint(updateType, update);
+        break;
+      case UserAction.ADD_POINT:
+        this.#pointsModel.addPoint(updateType, update);
+        break;
+      case UserAction.DELETE_POINT:
+        this.#pointsModel.deletePoint(updateType, update);
+        break;
+    }
   };
 
   #handleModelEvent = (updateType, data) => {
     console.log(updateType, data);
     // В зависимости от типа изменений решаем, что делать:
-    // - обновить часть списка (например, когда поменялось описание)
-    // - обновить список (например, когда точка удалена)
-    // - обновить список и фильтры (например, при переключении фильтра)
+    switch (updateType) {
+      case UpdateType.PATCH:
+        // - обновить часть списка (например, когда поменялось описание)
+        this.#pointPresenters.get(data.id).init(data);
+        break;
+      case UpdateType.MINOR:
+        // - обновить список (например, когда точка удалена)
+        break;
+      case UpdateType.MAJOR:
+        // - обновить список и фильтры (например, при переключении фильтра)
+        break;
+    }
   };
 
   #clearPointList() {
