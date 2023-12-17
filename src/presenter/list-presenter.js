@@ -1,4 +1,4 @@
-import { render } from '../framework/render.js';
+import { render, remove } from '../framework/render.js';
 import SortView from '../view/sort-view.js';
 import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
@@ -42,14 +42,7 @@ export default class ListPresenter {
   }
 
   init() {
-
-    if (this.points.length) {
-      this.#renderSort();
-      this.#renderPointsContainer();
-      this.#renderPoints();
-    } else {
-      this.#renderPointListEmpty();
-    }
+    this.#renderBoard();
   }
 
   #renderPoint(point) {
@@ -84,7 +77,6 @@ export default class ListPresenter {
   };
 
   #handleModelEvent = (updateType, data) => {
-    console.log(updateType, data);
     // В зависимости от типа изменений решаем, что делать:
     switch (updateType) {
       case UpdateType.PATCH:
@@ -93,16 +85,25 @@ export default class ListPresenter {
         break;
       case UpdateType.MINOR:
         // - обновить список (например, когда точка удалена)
+        this.#clearBoard();
+        this.#renderBoard();
         break;
       case UpdateType.MAJOR:
         // - обновить список и фильтры (например, при переключении фильтра)
+        this.#clearBoard({resetRenderedTaskCount: true, resetSortType: true});
+        this.#renderBoard();
         break;
     }
   };
 
-  #clearPointList() {
+  #clearBoard({resetSortType = false} = {}) {
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
+    remove(this.#sortComponent);
+
+    if (resetSortType) {
+      this.#currentSortType = SortType.DAY;
+    }
   }
 
   #handleSortTypeChange = (sortType) => {
@@ -111,12 +112,13 @@ export default class ListPresenter {
     }
 
     this.#currentSortType = sortType;
-    this.#clearPointList();
-    this.#renderPoints();
+    this.#clearBoard();
+    this.#renderBoard();
   };
 
   #renderSort() {
     this.#sortComponent = new SortView({
+      currentSortType: this.#currentSortType,
       onSortTypeChange: this.#handleSortTypeChange
     });
     render(this.#sortComponent, this.#container);
@@ -133,6 +135,16 @@ export default class ListPresenter {
   #renderPoints() {
     for (let i = 0; i < this.points.length; i++) {
       this.#renderPoint(this.points[i]);
+    }
+  }
+
+  #renderBoard() {
+    if (this.points.length) {
+      this.#renderSort();
+      this.#renderPointsContainer();
+      this.#renderPoints();
+    } else {
+      this.#renderPointListEmpty();
     }
   }
 
