@@ -9,17 +9,19 @@ export default class EditingFormView extends AbstractStatefulView {
   #offersModel = null;
   #arrayDestinationsModel = null;
   #rollupClickHandler = null;
+  #deleteClickHandler = null;
   #onSubmitClick = null;
   #datePickerFrom = null;
   #datePickerTo = null;
 
-  constructor({point, pointDestination, offersModel, arrayDestinationsModel, onRollupClick, onSubmitClick}){
+  constructor({point, pointDestination, offersModel, arrayDestinationsModel, onRollupClick, onDeleteClick, onSubmitClick}){
     super();
     this._setState(EditingFormView.parsePointToState({point}));
     this.#pointDestination = pointDestination;
     this.#offersModel = offersModel;
     this.#arrayDestinationsModel = arrayDestinationsModel;
     this.#rollupClickHandler = onRollupClick;
+    this.#deleteClickHandler = onDeleteClick;
     this.#onSubmitClick = onSubmitClick;
 
     this._restoreHandlers();
@@ -55,6 +57,7 @@ export default class EditingFormView extends AbstractStatefulView {
   _restoreHandlers = () => {
     this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);//
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);//
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formDeleteClickHandler);
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
     this.element.querySelector('.event__input--price').addEventListener('change',this.#priceChangeHandler);//
     this.element.querySelector('.event__type-group').addEventListener('change',this.#typeChangeHandler);//
@@ -103,6 +106,11 @@ export default class EditingFormView extends AbstractStatefulView {
   #rollupButtonClickHandler = (evt) => {
     evt.preventDefault();
     this.#rollupClickHandler();
+  };
+
+  #formDeleteClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#deleteClickHandler(EditingFormView.parseStateToPoint(this._state));
   };
 
   #pointSubmitHandler = (evt) => {

@@ -48,6 +48,7 @@ export default class PointPresenter {
       offersModel: this.#offersModel,
       arrayDestinationsModel: this.#destinationsModel.destinations,
       onRollupClick: this.#rollupButtonClickHandler,
+      onDeleteClick: this.#deleteClickHandler,
       onSubmitClick: this.#pointSubmitHandler,
     });
 
@@ -103,8 +104,8 @@ export default class PointPresenter {
 
   #favoriteClickHandler = () => {
     this.#handleDataChange(
-      UserAction.UPDATE_TASK,
-      UpdateType.MINOR,
+      UserAction.UPDATE_POINT,
+      UpdateType.PATCH,
       {...this.#point, isFavorite: !this.#point.isFavorite}
     );
   };
@@ -128,6 +129,14 @@ export default class PointPresenter {
       point
     );
     document.removeEventListener('keydown', this.#escKeyDownHandler);
+  };
+
+  #deleteClickHandler = (point) => {
+    this.#handleDataChange(
+      UserAction.DELETE_POINT,
+      UpdateType.MINOR,
+      point,
+    );
   };
 
 }
