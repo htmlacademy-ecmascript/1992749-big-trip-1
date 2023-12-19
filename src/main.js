@@ -17,6 +17,7 @@ const pointsModel = new PointsModel(mockPoints);
 
 const filterPresenter = new FilterPresenter({
   container: filterContainer,
+  filterModel,
   pointsModel
 });
 
