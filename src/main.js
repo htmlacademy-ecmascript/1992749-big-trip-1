@@ -27,7 +27,8 @@ const listPresenter = new ListPresenter({
   container: tripEventsContainer,
   destinationsModel,
   offersModel,
-  pointsModel
+  pointsModel,
+  filterModel
 });
 
 

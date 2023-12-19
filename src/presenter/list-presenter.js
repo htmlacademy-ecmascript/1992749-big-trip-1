@@ -3,7 +3,7 @@ import SortView from '../view/sort-view.js';
 import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
-//import { updateItem } from '../utils/common.js';
+import { filter } from '../utils/filter-utils.js';
 import { SortType, UserAction, UpdateType } from '../const.js';
 import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
 
@@ -12,6 +12,7 @@ export default class ListPresenter {
   #pointsModel = null;
   #destinationsModel = null;
   #offersModel = null;
+  #filterModel = null;
 
   #sortComponent = null;
   #pointListEmptyComponent = new PointListEmptyView();
@@ -20,25 +21,30 @@ export default class ListPresenter {
   #pointPresenters = new Map();
   #currentSortType = SortType.DAY;
 
-  constructor ({container, pointsModel, destinationsModel, offersModel}) {
+  constructor ({container, pointsModel, destinationsModel, offersModel, filterModel}) {
     this.#container = container;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
+    this.#filterModel = filterModel;
 
     this.#pointsModel.addObserver(this.#handleModelEvent);
+    this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   get points() {
+    const filterType = this.#filterModel.filter;
+    const points = this.#pointsModel.points;
+    const filteredPoints = filter[filterType](points);
 
     switch (this.#currentSortType) {
       case SortType.PRICE:
-        return [...this.#pointsModel.points].sort(getPointsPriceDifference);
+        return filteredPoints.sort(getPointsPriceDifference);
       case SortType.TIME:
-        return [...this.#pointsModel.points].sort(getPointsTimeDifference);
+        return filteredPoints.sort(getPointsTimeDifference);
     }
 
-    return this.#pointsModel.points;
+    return filteredPoints;
   }
 
   init() {
