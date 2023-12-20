@@ -4,7 +4,7 @@ import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
 import { filter } from '../utils/filter-utils.js';
-import { SortType, UserAction, UpdateType } from '../const.js';
+import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
 import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
 
 export default class ListPresenter {
@@ -15,11 +15,12 @@ export default class ListPresenter {
   #filterModel = null;
 
   #sortComponent = null;
-  #pointListEmptyComponent = new PointListEmptyView();
+  #pointListEmptyComponent = null;
   #pointsContainerComponent = new PointsContainerView();
 
   #pointPresenters = new Map();
   #currentSortType = SortType.DAY;
+  #filterType = FilterType.EVERYTHING;
 
   constructor ({container, pointsModel, destinationsModel, offersModel, filterModel}) {
     this.#container = container;
@@ -33,9 +34,9 @@ export default class ListPresenter {
   }
 
   get points() {
-    const filterType = this.#filterModel.filter;
+    this.#filterType = this.#filterModel.filter;
     const points = this.#pointsModel.points;
-    const filteredPoints = filter[filterType](points);
+    const filteredPoints = filter[this.#filterType](points);
 
     switch (this.#currentSortType) {
       case SortType.PRICE:
@@ -110,6 +111,11 @@ export default class ListPresenter {
     if (resetSortType) {
       this.#currentSortType = SortType.DAY;
     }
+
+    if (this.#pointListEmptyComponent) {
+      remove(this.#pointListEmptyComponent);
+    }
+
   }
 
   #handleSortTypeChange = (sortType) => {
@@ -131,6 +137,10 @@ export default class ListPresenter {
   }
 
   #renderPointListEmpty() {
+    this.#pointListEmptyComponent = new PointListEmptyView({
+      filterType: this.#filterType
+    });
+
     render(this.#pointListEmptyComponent, this.#container);
   }
 
