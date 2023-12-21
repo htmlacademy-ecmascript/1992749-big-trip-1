@@ -32,7 +32,7 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createEditFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination}){// pointDestination
+export function createNewPointTemplate({state, offersModel, arrayDestinationsModel, pointDestination}){// pointDestination
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   let currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
@@ -90,8 +90,8 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
    </div>
 
    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-   <button class="event__reset-btn" type="reset">Delete</button>
-   <button class="event__rollup-btn" type="button">
+   <button class="event__reset-btn" type="reset">Cancel</button>
+   
      <span class="visually-hidden">Open event</span>
  </header>
  

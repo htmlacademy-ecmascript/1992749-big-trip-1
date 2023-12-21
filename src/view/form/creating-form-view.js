@@ -3,7 +3,7 @@ import { createEditFormTemplate } from './editing-form-template.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-export default class EditingFormView extends AbstractStatefulView {
+export default class CreatingFormView extends AbstractStatefulView {
   #point = null;
   #pointDestination = null;
   #offersModel = null;
@@ -16,7 +16,7 @@ export default class EditingFormView extends AbstractStatefulView {
 
   constructor({point, pointDestination, offersModel, arrayDestinationsModel, onRollupClick, onDeleteClick, onSubmitClick}){
     super();
-    this._setState(EditingFormView.parsePointToState({point}));
+    this._setState(CreatingFormView.parsePointToState({point}));
     this.#pointDestination = pointDestination;
     this.#offersModel = offersModel;
     this.#arrayDestinationsModel = arrayDestinationsModel;
@@ -110,12 +110,12 @@ export default class EditingFormView extends AbstractStatefulView {
 
   #formDeleteClickHandler = (evt) => {
     evt.preventDefault();
-    this.#deleteClickHandler(EditingFormView.parseStateToPoint(this._state));
+    this.#deleteClickHandler(CreatingFormView.parseStateToPoint(this._state));
   };
 
   #pointSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#onSubmitClick(EditingFormView.parseStateToPoint(this._state));
+    this.#onSubmitClick(CreatingFormView.parseStateToPoint(this._state));
   };
 
   #priceChangeHandler = (evt) => {

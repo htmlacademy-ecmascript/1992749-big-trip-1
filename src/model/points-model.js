@@ -1,7 +1,7 @@
 import Observable from '../framework/observable';
 
 export default class PointsModel extends Observable{
-  //#points = null;
+  #points = null;
 
   constructor(points) {
     super();
