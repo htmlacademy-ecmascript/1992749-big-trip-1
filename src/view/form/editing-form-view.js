@@ -1,5 +1,6 @@
 import AbstractStatefulView from '../../framework/view/abstract-stateful-view.js';
 import { createEditFormTemplate } from './editing-form-template.js';
+import { EditType } from '../../const.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
@@ -9,12 +10,15 @@ export default class EditingFormView extends AbstractStatefulView {
   #offersModel = null;
   #arrayDestinationsModel = null;
   #rollupClickHandler = null;
+  #resetClickHandler = null;
   #deleteClickHandler = null;
   #onSubmitClick = null;
   #datePickerFrom = null;
   #datePickerTo = null;
 
-  constructor({point, pointDestination, offersModel, arrayDestinationsModel, onRollupClick, onDeleteClick, onSubmitClick}){
+  #editType = EditType.EDITING;
+
+  constructor({point, pointDestination, offersModel, arrayDestinationsModel, onRollupClick, onDeleteClick, onResetClick, onSubmitClick, editType}){
     super();
     this._setState(EditingFormView.parsePointToState({point}));
     this.#pointDestination = pointDestination;
@@ -22,7 +26,9 @@ export default class EditingFormView extends AbstractStatefulView {
     this.#arrayDestinationsModel = arrayDestinationsModel;
     this.#rollupClickHandler = onRollupClick;
     this.#deleteClickHandler = onDeleteClick;
+    this.#resetClickHandler = onResetClick;
     this.#onSubmitClick = onSubmitClick;
+    this.editType = editType;
 
     this._restoreHandlers();
   }
@@ -33,6 +39,7 @@ export default class EditingFormView extends AbstractStatefulView {
       pointDestination: this.#pointDestination,
       offersModel: this.#offersModel,
       arrayDestinationsModel: this.#arrayDestinationsModel,
+      editType: this.#editType,
     });
   }
 
@@ -55,10 +62,15 @@ export default class EditingFormView extends AbstractStatefulView {
   }
 
   _restoreHandlers = () => {
-    this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
-    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formDeleteClickHandler);
+    if (this.#editType === EditType.EDITING) {
+      this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
+      this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formDeleteClickHandler);
+    }
+    if (this.#editType === EditType.CREATING) {
+      this.element.querySelector('.event__reset-btn').addEventListener('click', this.#resetClickHandler);
+    }
     this.element.querySelector('.event__save-btn').addEventListener('click', this.#pointSubmitHandler);
+    this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);
     this.element.querySelector('.event__input--price').addEventListener('change',this.#priceChangeHandler);
     this.element.querySelector('.event__type-group').addEventListener('change',this.#typeChangeHandler);
     this.element.querySelector('.event__available-offers').addEventListener('change',this.#offersChangeHandler);

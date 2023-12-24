@@ -3,6 +3,7 @@ import SortView from '../view/sort-view.js';
 import PointsContainerView from '../view/points-container-view.js';
 import PointListEmptyView from '../view/point-list-empty-view.js';
 import PointPresenter from './point-presenter.js';
+import NewPointPresenter from './new-point-presenter.js';
 import { filter } from '../utils/filter-utils.js';
 import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
 import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
@@ -19,15 +20,22 @@ export default class ListPresenter {
   #pointsContainerComponent = new PointsContainerView();
 
   #pointPresenters = new Map();
+  #newPointPresenter = null;
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
 
-  constructor ({container, pointsModel, destinationsModel, offersModel, filterModel}) {
+  constructor ({container, pointsModel, destinationsModel, offersModel, filterModel, onNewPointDestroy}) {
     this.#container = container;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#filterModel = filterModel;
+
+    this.#newPointPresenter = new NewPointPresenter({
+      taskListContainer: this.#pointsContainerComponent.element,
+      onDataChange: this.#handleViewAction,
+      onDestroy: onNewPointDestroy
+    });
 
     this.#pointsModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
@@ -52,6 +60,12 @@ export default class ListPresenter {
     this.#renderBoard();
   }
 
+  createPoint() {
+    this.#currentSortType = SortType.DEFAULT;
+    this.#filterModel.setFilter(UpdateType.MAJOR, FilterType.ALL);
+    this.#newPointPresenter.init();
+  }
+
   #renderPoint(point) {
     const pointPresenter = new PointPresenter({
       pointsContainer: this.#pointsContainerComponent.element,
@@ -66,6 +80,7 @@ export default class ListPresenter {
   }
 
   #handleModeChange = () => {
+    this.#newPointPresenter.destroy();
     this.#pointPresenters.forEach((presenter) => presenter.resetView());
   };
 
@@ -104,6 +119,7 @@ export default class ListPresenter {
   };
 
   #clearBoard({resetSortType = false} = {}) {
+    this.#newPointPresenter.destroy();
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
     remove(this.#sortComponent);

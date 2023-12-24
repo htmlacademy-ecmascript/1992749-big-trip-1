@@ -1,5 +1,15 @@
 import{formatSrtingToDateTime, capitalize } from '../../utils/point-utils.js';
-import { TYPES } from '../../const.js';
+import { TYPES, EditType } from '../../const.js';
+
+function createEditButtonsTemplate() {//this.#deleteClickHandler = onDeleteClick;
+  return `<button class="event__reset-btn" type="reset">Delete</button>
+  <button class="event__rollup-btn" type="button">
+     <span class="visually-hidden">Open event</span>`;
+}//this.#rollupClickHandler = onRollupClick;
+
+function createCancelButtonTemplate() {
+  return '<button class="event__reset-btn" type="reset">Cancel</button>';//this.#cancelClickHandler = onCancelClick;
+}
 
 function showType(types, activeType) {
   return types.map((item) => (` <div class="event__type-item">
@@ -32,7 +42,7 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createEditFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination}){// pointDestination
+export function createEditFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination, editType}){// pointDestination
   const {point} = state;
   const {basePrice, type, dateFrom, dateTo, offers} = point;
   let currentDestination = arrayDestinationsModel.find((item) => item.id === point.destination);
@@ -88,11 +98,12 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
      </label>
      <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
    </div>
-
    <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
-   <button class="event__reset-btn" type="reset">Delete</button>
-   <button class="event__rollup-btn" type="button">
-     <span class="visually-hidden">Open event</span>
+
+   <!-- Кнопки и код на замену -->
+  ${editType === EditType.EDITING ? createEditButtonsTemplate() : createCancelButtonTemplate()}
+   <!-- Кнопки и код на замену -->
+
  </header>
  
  <section class="event__details">

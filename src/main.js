@@ -34,3 +34,6 @@ const listPresenter = new ListPresenter({
 
 listPresenter.init();
 
+
+const newEvent = document.querySelector('.trip-main__event-add-btn');
+newEvent.addEventListener('click', () => listPresenter.createPoint());

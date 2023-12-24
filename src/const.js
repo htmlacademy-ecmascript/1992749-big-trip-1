@@ -26,3 +26,8 @@ export const UpdateType = {
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
 };
+
+export const EditType = {
+  EDITING: 'EDITING',
+  CREATING: 'CREATING',
+};
