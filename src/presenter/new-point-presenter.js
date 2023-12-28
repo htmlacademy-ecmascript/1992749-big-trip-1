@@ -1,49 +1,56 @@
 import EditingFormView from '../view/form/editing-form-view';
-import { render, remove } from '../framework/render';
-import { UserAction,UpdateType, EditType } from '../const';
+import { render, remove, RenderPosition } from '../framework/render';
+import { UserAction, UpdateType, EditType, pointDefault } from '../const';
 
+const newEvent = document.querySelector('.trip-main__event-add-btn');
+
+export function getNewEvent (presenter) {
+  return newEvent.addEventListener('click', () => {
+    presenter.createPoint();
+    newEvent.setAttribute('disabled', 'disabled');
+  });
+}
 export default class NewPointPresenter {
   #pointsContainer = null;
   #destinationsModel = null;
   #offersModel = null;
   #handleDataChange = null;
-  #handleDestroy = null;
 
   #editingFormComponent = null;
 
-  constructor({pointsContainer, destinationsModel, offersModel, onDataChange, onDestroy}) {
+  constructor({pointsContainer, destinationsModel, offersModel, onDataChange}) {
     this.#pointsContainer = pointsContainer;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#handleDataChange = onDataChange;
-    this.#handleDestroy = onDestroy;
   }
 
-  init() {
+  init(point) {
+    point = pointDefault;
 
     if (this.#editingFormComponent !== null) {
       return;
     }
 
     this.#editingFormComponent = new EditingFormView({
-
-      pointDestination: this.#destinationsModel,//get()
-      offersModel: this.#offersModel,//get()
-      type: EditType.CREATING,
+      point,
+      pointDestination: this.#destinationsModel.getById(point.destination),
+      offersModel: this.#offersModel,
+      arrayDestinationsModel: this.#destinationsModel.destinations,
+      editType: EditType.CREATING,
       onResetClick: this.#resetClickHandler,
+      onDeleteClick: this.#deleteClickHandler,
       onSubmitClick: this.#pointSubmitHandler,
     });
 
-    render(this.#editingFormComponent, this.#pointsContainer);
+    render(this.#editingFormComponent, this.#pointsContainer, RenderPosition.AFTERBEGIN);
     document.addEventListener('keydown', this.#escKeyDownHandler);
   }
 
-  destroy = (isCanceled = true) => {
+  destroy = () => {
     if (this.#editingFormComponent === null) {
       return;
     }
-
-    this.#handleDestroy(isCanceled);
 
     remove(this.#editingFormComponent);
     this.#editingFormComponent = null;
@@ -55,21 +62,32 @@ export default class NewPointPresenter {
     this.#handleDataChange(
       UserAction.ADD_POINT,
       UpdateType.MINOR,
+      {id: crypto.randomUUID(), ...point},
+    );
+    this.destroy();
+    newEvent.removeAttribute('disabled');
+  };
+
+  #deleteClickHandler = (point) => {
+    this.#handleDataChange(
+      UserAction.DELETE_POINT,
+      UpdateType.MINOR,
       point,
     );
-    this.destroy(false);
   };
 
   #escKeyDownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       this.destroy();
-      //document.removeEventListener('keydown', this.#escKeyDownHandler);
+      document.removeEventListener('keydown', this.#escKeyDownHandler);
+      newEvent.removeAttribute('disabled');
     }
   };
 
   #resetClickHandler = () => {
     this.destroy();
+    newEvent.removeAttribute('disabled');
   };
 
 }

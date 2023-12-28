@@ -24,7 +24,7 @@ export default class ListPresenter {
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
 
-  constructor ({container, pointsModel, destinationsModel, offersModel, filterModel, onNewPointDestroy}) {
+  constructor ({container, pointsModel, destinationsModel, offersModel, filterModel}) {
     this.#container = container;
     this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
@@ -32,9 +32,10 @@ export default class ListPresenter {
     this.#filterModel = filterModel;
 
     this.#newPointPresenter = new NewPointPresenter({
-      taskListContainer: this.#pointsContainerComponent.element,
+      pointsContainer: this.#pointsContainerComponent.element,
+      destinationsModel: this.#destinationsModel,
+      offersModel: this.#offersModel,
       onDataChange: this.#handleViewAction,
-      onDestroy: onNewPointDestroy
     });
 
     this.#pointsModel.addObserver(this.#handleModelEvent);
@@ -62,7 +63,7 @@ export default class ListPresenter {
 
   createPoint() {
     this.#currentSortType = SortType.DEFAULT;
-    this.#filterModel.setFilter(UpdateType.MAJOR, FilterType.ALL);
+    this.#filterModel.setFilter(UpdateType.MAJOR, FilterType.EVERYTHING);
     this.#newPointPresenter.init();
   }
 

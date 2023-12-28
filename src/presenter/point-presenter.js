@@ -1,7 +1,7 @@
 import PointView from '../view/point/point-viewt';
 import EditingFormView from '../view/form/editing-form-view';
 import { render, replace, remove } from '../framework/render';
-import { UserAction,UpdateType } from '../const';
+import { UserAction, UpdateType, EditType} from '../const';
 
 const Mode = {
   DEFAULT: 'DEFAULT',
@@ -19,6 +19,7 @@ export default class PointPresenter {
 
   #point = null;
   #mode = Mode.DEFAULT;
+  #editType = EditType.EDITING;
 
   constructor({pointsContainer, destinationsModel, offersModel, onDataChange, onModeChange}) {
     this.#pointsContainer = pointsContainer;
@@ -50,6 +51,7 @@ export default class PointPresenter {
       onRollupClick: this.#rollupButtonClickHandler,
       onDeleteClick: this.#deleteClickHandler,
       onSubmitClick: this.#pointSubmitHandler,
+      editType: this.#editType,
     });
 
     if (prevPointComponent === null || prevEditingFormComponent === null) {

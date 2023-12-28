@@ -31,3 +31,26 @@ export const EditType = {
   EDITING: 'EDITING',
   CREATING: 'CREATING',
 };
+
+export const pointDefault = {
+  //'id': crypto.randomUUID(),//be6fc6dd-a271-4890-bd55-ee0e6230b689
+  'type': 'flight',
+  'dateFrom': null,
+  'dateTo': null,
+  'destination': '463e9ec8-b77b-40d2-b6d2-e59642ea69b7',
+  'basePrice': 0,
+  'isFavorite': false,
+  'offers': [],
+};
+/*
+export const pointDefault = {
+  'id': crypto.randomUUID(),
+  'type': 'flight',
+  'dateFrom': null,
+  'dateTo': null,
+  'destination': null,
+  'basePrice': 0,
+  'isFavorite': false,
+  'offers': [],
+};
+*/

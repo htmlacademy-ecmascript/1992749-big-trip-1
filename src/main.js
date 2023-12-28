@@ -7,6 +7,8 @@ import PointsModel from './model/points-model.js';
 import FilterModel from './model/filter-model.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import { mockPoints } from './mock/points-mock.js';
+import { getNewEvent } from './presenter/new-point-presenter.js';
+
 const tripEventsContainer = document.querySelector('.trip-events');
 const filterContainer = document.querySelector('.trip-controls__filters');
 
@@ -31,9 +33,6 @@ const listPresenter = new ListPresenter({
   filterModel
 });
 
-
 listPresenter.init();
 
-
-const newEvent = document.querySelector('.trip-main__event-add-btn');
-newEvent.addEventListener('click', () => listPresenter.createPoint());
+getNewEvent(listPresenter);
