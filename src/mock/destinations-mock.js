@@ -1,3 +1,4 @@
+/*
 export const mockDestinations = [
   {
     'id': '1378c813-4b3b-4251-95b9-5dc2830be376',
@@ -844,4 +845,842 @@ export const mockDestinations = [
     ]
   }
 ];
-
+*/
+export const mockDestinations = [
+  {
+    'id': '839989fd-f49b-4827-ad99-157cd6cdce6d',
+    'name': 'Chamonix',
+    'description': 'Chamonix, is a beautiful city, a true asian pearl, in a middle of Europe, for those who value comfort and coziness, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Chamonix park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Chamonix central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Chamonix central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Chamonix embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/6.jpg',
+        'description': 'Chamonix parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Chamonix parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Chamonix embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Chamonix embankment'
+      }
+    ]
+  },
+  {
+    'id': 'bffc223b-30db-493d-aed4-e7091b0dff2f',
+    'name': 'Geneva',
+    'description': 'Geneva, a true asian pearl, with crowded streets, with a beautiful old town, a perfect place to stay with a family, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Geneva biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Geneva kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/19.jpg',
+        'description': 'Geneva parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/19.jpg',
+        'description': 'Geneva zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/6.jpg',
+        'description': 'Geneva city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Geneva central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Geneva parliament building'
+      }
+    ]
+  },
+  {
+    'id': '85687362-04be-467c-a77c-75810f760533',
+    'name': 'Amsterdam',
+    'description': 'Amsterdam, in a middle of Europe.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Amsterdam central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Amsterdam central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Amsterdam park'
+      }
+    ]
+  },
+  {
+    'id': 'e4d03396-702f-44c8-988d-342736b43f5d',
+    'name': 'Helsinki',
+    'description': 'Helsinki, is a beautiful city, with a beautiful old town, for those who value comfort and coziness, full of of cozy canteens where you can try the best coffee in the Middle East.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/12.jpg',
+        'description': 'Helsinki embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Helsinki parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Helsinki park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Helsinki embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Helsinki parliament building'
+      }
+    ]
+  },
+  {
+    'id': 'a47df85f-a5e8-45c4-85c4-c38010cb0c71',
+    'name': 'Oslo',
+    'description': 'Oslo, is a beautiful city.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/19.jpg',
+        'description': 'Oslo biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Oslo biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Oslo street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Oslo parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Oslo city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Oslo parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Oslo zoo'
+      }
+    ]
+  },
+  {
+    'id': 'dc60db56-40c0-4dc3-bf39-c17eeeb0bfff',
+    'name': 'Kopenhagen',
+    'description': 'Kopenhagen, a true asian pearl, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/12.jpg',
+        'description': 'Kopenhagen central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Kopenhagen city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Kopenhagen zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Kopenhagen park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Kopenhagen embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Kopenhagen embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Kopenhagen parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Kopenhagen embankment'
+      }
+    ]
+  },
+  {
+    'id': 'd88661d6-9972-4d1a-be3a-209583edd49b',
+    'name': 'Den Haag',
+    'description': 'Den Haag, with a beautiful old town, middle-eastern paradise, for those who value comfort and coziness.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/12.jpg',
+        'description': 'Den Haag embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Den Haag park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/12.jpg',
+        'description': 'Den Haag park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Den Haag kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Den Haag parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Den Haag street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Den Haag embankment'
+      }
+    ]
+  },
+  {
+    'id': 'f52229a1-b019-4b50-a32d-c4f65c5b255b',
+    'name': 'Rotterdam',
+    'description': 'Rotterdam, a true asian pearl, with crowded streets, with an embankment of a mighty river as a centre of attraction, a perfect place to stay with a family.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Rotterdam parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/6.jpg',
+        'description': 'Rotterdam park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Rotterdam park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Rotterdam biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Rotterdam kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Rotterdam parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Rotterdam parliament building'
+      }
+    ]
+  },
+  {
+    'id': '8f865db7-5b51-4d6b-9e50-656c4f0bc4e1',
+    'name': 'Saint Petersburg',
+    'description': 'Saint Petersburg, with a beautiful old town, middle-eastern paradise, for those who value comfort and coziness, a perfect place to stay with a family.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Saint Petersburg biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Saint Petersburg city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Saint Petersburg park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Saint Petersburg zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Saint Petersburg kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Saint Petersburg street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Saint Petersburg central station'
+      }
+    ]
+  },
+  {
+    'id': '2524ed4e-6c8c-49ae-85ea-9bc8585b749a',
+    'name': 'Moscow',
+    'description': 'Moscow, is a beautiful city, a true asian pearl, middle-eastern paradise, a perfect place to stay with a family, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Moscow biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Moscow street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Moscow biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Moscow park'
+      }
+    ]
+  },
+  {
+    'id': 'aeb2ae5f-212d-4953-8b8a-1c64f984c10b',
+    'name': 'Sochi',
+    'description': 'Sochi, middle-eastern paradise.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Sochi zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Sochi city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Sochi parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Sochi city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Sochi central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Sochi kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Sochi central station'
+      }
+    ]
+  },
+  {
+    'id': 'd127ac39-27be-4f30-a4a0-010f4b6d3d3c',
+    'name': 'Tokio',
+    'description': 'Tokio, a true asian pearl, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Tokio embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Tokio central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Tokio city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Tokio city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Tokio kindergarten'
+      }
+    ]
+  },
+  {
+    'id': '485580d6-8d8b-4695-bf7d-d16dd3f89b80',
+    'name': 'Kioto',
+    'description': 'Kioto, is a beautiful city, for those who value comfort and coziness, a perfect place to stay with a family.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/12.jpg',
+        'description': 'Kioto parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Kioto zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Kioto kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Kioto biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Kioto city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Kioto zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Kioto embankment'
+      }
+    ]
+  },
+  {
+    'id': 'd7a6a611-0bc0-49a5-839f-e04adc742928',
+    'name': 'Nagasaki',
+    'description': 'Nagasaki, with crowded streets, with an embankment of a mighty river as a centre of attraction.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Nagasaki city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Nagasaki city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Nagasaki kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Nagasaki kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Nagasaki city centre'
+      }
+    ]
+  },
+  {
+    'id': '59d20e9c-ab64-4bdd-8dfb-5de0c402a059',
+    'name': 'Hiroshima',
+    'description': 'Hiroshima, with crowded streets, with a beautiful old town, middle-eastern paradise, full of of cozy canteens where you can try the best coffee in the Middle East.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Hiroshima embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Hiroshima city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Hiroshima parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Hiroshima city centre'
+      }
+    ]
+  },
+  {
+    'id': '449bcd81-7e07-4be9-ba7c-ce4b55e24e49',
+    'name': 'Berlin',
+    'description': 'Berlin, a true asian pearl, with crowded streets, in a middle of Europe, middle-eastern paradise, with an embankment of a mighty river as a centre of attraction, full of of cozy canteens where you can try the best coffee in the Middle East.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Berlin central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Berlin parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Berlin park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Berlin parliament building'
+      }
+    ]
+  },
+  {
+    'id': '910ecfc8-0810-4519-8f74-6cdd2bbee1a1',
+    'name': 'Munich',
+    'description': 'Munich, in a middle of Europe, for those who value comfort and coziness.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Munich city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Munich park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Munich kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Munich parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Munich embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Munich central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Munich embankment'
+      }
+    ]
+  },
+  {
+    'id': '463e9ec8-b77b-40d2-b6d2-e59642ea69b7',
+    'name': 'Frankfurt',
+    'description': 'Frankfurt, a true asian pearl, middle-eastern paradise, full of of cozy canteens where you can try the best coffee in the Middle East.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Frankfurt parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Frankfurt city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Frankfurt zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Frankfurt city centre'
+      }
+    ]
+  },
+  {
+    'id': 'af6d1169-a671-4454-be5c-dcdc29d1d81a',
+    'name': 'Vien',
+    'description': 'Vien, is a beautiful city.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Vien street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Vien city centre'
+      }
+    ]
+  },
+  {
+    'id': 'd1544164-6560-4bf7-8f6e-ff21a64194e0',
+    'name': 'Rome',
+    'description': 'Rome, with an embankment of a mighty river as a centre of attraction, full of of cozy canteens where you can try the best coffee in the Middle East, a perfect place to stay with a family.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Rome embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/2.jpg',
+        'description': 'Rome park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Rome city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Rome embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Rome central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/19.jpg',
+        'description': 'Rome park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Rome street market'
+      }
+    ]
+  },
+  {
+    'id': '3bd5d119-fd29-4c68-a314-a36f48306938',
+    'name': 'Naples',
+    'description': 'Naples, is a beautiful city.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Naples street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Naples street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Naples kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Naples street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Naples street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Naples street market'
+      }
+    ]
+  },
+  {
+    'id': 'f4593f91-2660-4204-9d6c-fce85baa0cad',
+    'name': 'Venice',
+    'description': 'Venice, with crowded streets, middle-eastern paradise, famous for its crowded street markets with the best street food in Asia.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Venice park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/9.jpg',
+        'description': 'Venice parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Venice biggest supermarket'
+      }
+    ]
+  },
+  {
+    'id': '1807957a-e0ef-467c-873f-b9ac17a95af3',
+    'name': 'Milan',
+    'description': 'Milan, in a middle of Europe, with a beautiful old town, for those who value comfort and coziness, a perfect place to stay with a family.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Milan biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/19.jpg',
+        'description': 'Milan kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/17.jpg',
+        'description': 'Milan park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Milan street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Milan embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Milan kindergarten'
+      }
+    ]
+  },
+  {
+    'id': '680224f9-a4ae-40a5-87c3-036c25ae97a7',
+    'name': 'Monaco',
+    'description': 'Monaco, for those who value comfort and coziness.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Monaco city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Monaco zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Monaco park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Monaco street market'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Monaco biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Monaco city centre'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/3.jpg',
+        'description': 'Monaco biggest supermarket'
+      }
+    ]
+  },
+  {
+    'id': 'f4632236-497f-4472-af53-aaef07c26ede',
+    'name': 'Paris',
+    'description': 'Paris, middle-eastern paradise, with an embankment of a mighty river as a centre of attraction.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/6.jpg',
+        'description': 'Paris central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Paris parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/5.jpg',
+        'description': 'Paris biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/16.jpg',
+        'description': 'Paris zoo'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/14.jpg',
+        'description': 'Paris parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Paris park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Paris biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Paris embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Paris zoo'
+      }
+    ]
+  },
+  {
+    'id': '66ea0601-0940-47c6-8c79-5811b4062837',
+    'name': 'Barcelona',
+    'description': 'Barcelona, in a middle of Europe, middle-eastern paradise, with an embankment of a mighty river as a centre of attraction.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Barcelona biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Barcelona kindergarten'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/15.jpg',
+        'description': 'Barcelona central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Barcelona biggest supermarket'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/4.jpg',
+        'description': 'Barcelona parliament building'
+      }
+    ]
+  },
+  {
+    'id': 'bb1e4018-65c6-4d60-82c4-54b322ad166f',
+    'name': 'Valencia',
+    'description': 'Valencia, with crowded streets.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Valencia parliament building'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/1.jpg',
+        'description': 'Valencia park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/10.jpg',
+        'description': 'Valencia central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/8.jpg',
+        'description': 'Valencia park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/7.jpg',
+        'description': 'Valencia park'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/13.jpg',
+        'description': 'Valencia kindergarten'
+      }
+    ]
+  },
+  {
+    'id': '476ecb22-a340-4aea-91af-03f86c6e5570',
+    'name': 'Madrid',
+    'description': 'Madrid, is a beautiful city, a true asian pearl, with a beautiful old town, middle-eastern paradise, for those who value comfort and coziness.',
+    'pictures': [
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Madrid embankment'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/11.jpg',
+        'description': 'Madrid central station'
+      },
+      {
+        'src': 'https://20.ecmascript.pages.academy/static/destinations/18.jpg',
+        'description': 'Madrid central station'
+      }
+    ]
+  }
+];
