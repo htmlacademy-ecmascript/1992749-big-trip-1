@@ -1,5 +1,6 @@
 import{formatSrtingToDateTime, capitalize } from '../../utils/point-utils.js';
 import { TYPES, EditType } from '../../const.js';
+import he from 'he';
 
 function createEditButtonsTemplate() {
   return `<button class="event__reset-btn" type="reset">Delete</button>
@@ -78,7 +79,7 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
    <div class="event__field-group  event__field-group--destination">
      <label class="event__label  event__type-output" for="event-destination-1">${point.type}</label>
      <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" 
-     placeholder="Chamonix" value="${point.destination ? arrayDestinationsModel.find((item) => item.name === currentDestination.name).name : ''}" list="destination-list-1">
+     placeholder="Chamonix" value="${point.destination ? he.encode(arrayDestinationsModel.find((item) => item.name === currentDestination.name).name) : ''}" list="destination-list-1">
      <datalist id="destination-list-1">
 
        ${destinationList(arrayDestinationsModel)}
