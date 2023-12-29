@@ -1,6 +1,8 @@
 import EditingFormView from '../view/form/editing-form-view';
 import { render, remove, RenderPosition } from '../framework/render';
 import { UserAction, UpdateType, EditType, pointDefault } from '../const';
+import dayjs from 'dayjs';
+import { formatSrtingToDateTime } from '../utils/point-utils';
 
 const newEvent = document.querySelector('.trip-main__event-add-btn');
 
@@ -9,6 +11,14 @@ export function getNewEvent (presenter) {
     presenter.createPoint();
     newEvent.setAttribute('disabled', 'disabled');
   });
+}
+
+function isFormValid(point) {
+  return point.destination !== null && point.destination !== undefined
+    && point.basePrice !== 0 && point.basePrice !== undefined && point.basePrice > 0
+
+    && point.dateFrom !== formatSrtingToDateTime(dayjs()) && point.dateFrom !== null
+    && point.dateTo !== undefined && point.dateTo !== null;
 }
 export default class NewPointPresenter {
   #pointsContainer = null;
@@ -54,18 +64,20 @@ export default class NewPointPresenter {
 
     remove(this.#editingFormComponent);
     this.#editingFormComponent = null;
-
+    newEvent.removeAttribute('disabled');
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   };
 
   #pointSubmitHandler = (point) => {
-    this.#handleDataChange(
-      UserAction.ADD_POINT,
-      UpdateType.MINOR,
-      {id: crypto.randomUUID(), ...point},
-    );
-    this.destroy();
-    newEvent.removeAttribute('disabled');
+
+    if (isFormValid(point)) {
+      this.#handleDataChange(
+        UserAction.ADD_POINT,
+        UpdateType.MINOR,
+        {id: crypto.randomUUID(), ...point},
+      );
+      this.destroy();
+    }
   };
 
   #deleteClickHandler = (point) => {
@@ -81,13 +93,11 @@ export default class NewPointPresenter {
       evt.preventDefault();
       this.destroy();
       document.removeEventListener('keydown', this.#escKeyDownHandler);
-      newEvent.removeAttribute('disabled');
     }
   };
 
   #resetClickHandler = () => {
     this.destroy();
-    newEvent.removeAttribute('disabled');
   };
 
 }
