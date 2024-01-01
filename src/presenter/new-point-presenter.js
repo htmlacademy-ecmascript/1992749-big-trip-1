@@ -1,8 +1,7 @@
 import EditingFormView from '../view/form/editing-form-view';
 import { render, remove, RenderPosition } from '../framework/render';
 import { UserAction, UpdateType, EditType, pointDefault } from '../const';
-import dayjs from 'dayjs';
-import { formatSrtingToDateTime } from '../utils/point-utils';
+import { isFormValid } from '../view/form/editing-form-view';
 
 const newEvent = document.querySelector('.trip-main__event-add-btn');
 
@@ -13,13 +12,6 @@ export function getNewEvent (presenter) {
   });
 }
 
-function isFormValid(point) {
-  return point.destination !== null && point.destination !== undefined
-    && point.basePrice !== 0 && point.basePrice !== undefined && point.basePrice > 0
-
-    && point.dateFrom !== formatSrtingToDateTime(dayjs()) && point.dateFrom !== null
-    && point.dateTo !== undefined && point.dateTo !== null;
-}
 export default class NewPointPresenter {
   #pointsContainer = null;
   #destinationsModel = null;
