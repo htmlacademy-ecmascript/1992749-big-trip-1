@@ -1,5 +1,6 @@
 import Observable from '../framework/observable';
 import { UpdateType } from '../const';
+import { newEvent } from '../presenter/new-point-presenter';
 
 export default class PointsModel extends Observable{
   #pointsApiService = null;
@@ -17,7 +18,7 @@ export default class PointsModel extends Observable{
     } catch(err) {
       this.#points = [];
     }
-
+    newEvent.setAttribute('disabled', 'disabled');
     this._notify(UpdateType.INIT);
   }
 

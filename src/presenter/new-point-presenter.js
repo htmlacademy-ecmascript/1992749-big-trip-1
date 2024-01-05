@@ -3,7 +3,7 @@ import { render, remove, RenderPosition } from '../framework/render';
 import { UserAction, UpdateType, EditType, pointDefault } from '../const';
 import { isFormValid } from '../view/form/editing-form-view';
 
-const newEvent = document.querySelector('.trip-main__event-add-btn');
+export const newEvent = document.querySelector('.trip-main__event-add-btn');
 
 export function getNewEvent (presenter) {
   return newEvent.addEventListener('click', () => {

@@ -6,7 +6,7 @@ import OffersModel from './model/offers-model.js';
 import PointsModel from './model/points-model.js';
 import FilterModel from './model/filter-model.js';
 import FilterPresenter from './presenter/filter-presenter.js';
-import { getNewEvent } from './presenter/new-point-presenter.js';
+import { getNewEvent, newEvent } from './presenter/new-point-presenter.js';
 import PointsApiService from './points-api-service.js';
 
 const AUTHORIZATION = 'Basic tr878kdldjd';
@@ -41,4 +41,7 @@ listPresenter.init();
 
 getNewEvent(listPresenter);
 
-pointsModel.init();
+pointsModel.init()
+  .finally(() => {
+    newEvent.removeAttribute('disabled');
+  });
