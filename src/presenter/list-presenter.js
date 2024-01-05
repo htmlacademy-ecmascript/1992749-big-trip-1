@@ -7,6 +7,7 @@ import NewPointPresenter from './new-point-presenter.js';
 import { filter } from '../utils/filter-utils.js';
 import { SortType, UserAction, UpdateType, FilterType } from '../const.js';
 import { getPointsPriceDifference, getPointsTimeDifference } from '../utils/point-utils.js';
+import LoadingView from '../view/loading-view.js';
 
 export default class ListPresenter {
   #container = null;
@@ -18,11 +19,13 @@ export default class ListPresenter {
   #sortComponent = null;
   #pointListEmptyComponent = null;
   #pointsContainerComponent = new PointsContainerView();
+  #loadingComponent = new LoadingView();
 
   #pointPresenters = new Map();
   #newPointPresenter = null;
   #currentSortType = SortType.DAY;
   #filterType = FilterType.EVERYTHING;
+  #isLoading = true;
 
   constructor ({container, pointsModel, destinationsModel, offersModel, filterModel}) {
     this.#container = container;
@@ -100,20 +103,21 @@ export default class ListPresenter {
   };
 
   #handleModelEvent = (updateType, data) => {
-    // В зависимости от типа изменений решаем, что делать:
     switch (updateType) {
       case UpdateType.PATCH:
-        // - обновить часть списка (например, когда поменялось описание)
         this.#pointPresenters.get(data.id).init(data);
         break;
       case UpdateType.MINOR:
-        // - обновить список (например, когда точка удалена)
         this.#clearBoard();
         this.#renderBoard();
         break;
       case UpdateType.MAJOR:
-        // - обновить список и фильтры (например, при переключении фильтра)
         this.#clearBoard({resetRenderedTaskCount: true, resetSortType: true});
+        this.#renderBoard();
+        break;
+      case UpdateType.INIT:
+        this.#isLoading = false;
+        remove(this.#loadingComponent);
         this.#renderBoard();
         break;
     }
@@ -124,6 +128,7 @@ export default class ListPresenter {
     this.#pointPresenters.forEach((presenter) => presenter.destroy());
     this.#pointPresenters.clear();
     remove(this.#sortComponent);
+    remove(this.#loadingComponent);
 
     if (resetSortType) {
       this.#currentSortType = SortType.DAY;
@@ -153,6 +158,10 @@ export default class ListPresenter {
     render(this.#sortComponent, this.#container);
   }
 
+  #renderLoading() {
+    render(this.#loadingComponent, this.#container);
+  }
+
   #renderPointListEmpty() {
     this.#pointListEmptyComponent = new PointListEmptyView({
       filterType: this.#filterType
@@ -172,6 +181,10 @@ export default class ListPresenter {
   }
 
   #renderBoard() {
+    if (this.#isLoading) {
+      this.#renderLoading();
+      return;
+    }
     if (this.points.length) {
       this.#renderSort();
       this.#renderPointsContainer();

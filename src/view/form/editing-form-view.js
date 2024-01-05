@@ -3,7 +3,16 @@ import { createEditFormTemplate } from './editing-form-template.js';
 import { EditType } from '../../const.js';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import dayjs from 'dayjs';
+import { formatSrtingToDateTime } from '../../utils/point-utils.js';
 
+export function isFormValid(point) {
+  return point.destination !== null && point.destination !== undefined
+    && point.basePrice !== 0 && point.basePrice !== undefined && point.basePrice > 0
+
+    && point.dateFrom !== formatSrtingToDateTime(dayjs()) && point.dateFrom !== null
+    && point.dateTo !== undefined && point.dateTo !== null;
+}
 export default class EditingFormView extends AbstractStatefulView {
   #point = null;
   #pointDestination = null;
