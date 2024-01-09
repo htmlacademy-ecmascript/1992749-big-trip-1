@@ -197,11 +197,20 @@ export default class EditingFormView extends AbstractStatefulView {
     });
   }
 
-  static parsePointToState({point}) {
-    return {point};
+  static parsePointToState(point) {//console.log(point.point)
+    point.point = {
+      ...point.point,
+      isDisabled: false,
+      isSaving: false,
+      isDeleting: false,
+    };
+    return point;
   }
 
-  static parseStateToPoint(state) {
+  static parseStateToPoint(state) {//console.log(state);debugger
+    delete state.point.isDisabled;
+    delete state.point.isSaving;
+    delete state.point.isDeleting;
     return state.point;
   }
 
