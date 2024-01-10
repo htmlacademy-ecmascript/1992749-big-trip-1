@@ -197,7 +197,7 @@ export default class EditingFormView extends AbstractStatefulView {
     });
   }
 
-  static parsePointToState(point) {//console.log(point.point)
+  static parsePointToState(point) {
     point.point = {
       ...point.point,
       isDisabled: false,
@@ -207,7 +207,7 @@ export default class EditingFormView extends AbstractStatefulView {
     return point;
   }
 
-  static parseStateToPoint(state) {//console.log(state);debugger
+  static parseStateToPoint(state) {
     delete state.point.isDisabled;
     delete state.point.isSaving;
     delete state.point.isDeleting;

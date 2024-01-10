@@ -60,6 +60,13 @@ export default class NewPointPresenter {
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   };
 
+  setSaving() {
+    this.#editingFormComponent.updateElement({
+      isDisabled: true,
+      isSaving: true,
+    });
+  }
+
   #pointSubmitHandler = (point) => {
 
     if (isFormValid(point)) {
