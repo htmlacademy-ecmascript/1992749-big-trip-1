@@ -110,8 +110,8 @@ export default class PointPresenter {
   }
 
   #replaceFormToPoint () {
-    replace(this.#pointComponent, this.#editingFormComponent);
-    this.#mode = Mode.DEFAULT;
+    replace(this.#editingFormComponent, this.#editingFormComponent);
+    //this.#mode = Mode.DEFAULT;
   }
 
   #escKeyDownHandler = (evt) => {
@@ -143,7 +143,6 @@ export default class PointPresenter {
   };
 
   #pointSubmitHandler = (point) => {
-    this.#replaceFormToPoint();
     this.#handleDataChange(
       UserAction.UPDATE_POINT,
       UpdateType.MINOR,

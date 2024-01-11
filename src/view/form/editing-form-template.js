@@ -78,7 +78,7 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
 
    <div class="event__field-group  event__field-group--destination">
      <label class="event__label  event__type-output" for="event-destination-1">${point.type}</label>
-     <input class="event__input  event__input--destination" ${point.isDisabled ? 'disabled' : ''} id="event-destination-1" type="text" name="event-destination" 
+     <input class="event__input  event__input--destination" ${state.isDisabled ? 'disabled' : ''} id="event-destination-1" type="text" name="event-destination" 
      placeholder="Chamonix" value="${point.destination ? he.encode(arrayDestinationsModel.find((item) => item.name === currentDestination.name).name) : ''}" list="destination-list-1">
      <datalist id="destination-list-1">
 
@@ -89,11 +89,11 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
 
    <div class="event__field-group  event__field-group--time">
      <label class="visually-hidden" for="event-start-time-1">From</label>
-     <input class="event__input  event__input--time" ${point.isDisabled ? 'disabled' : ''} id="event-start-time-1" type="text" name="event-start-time" 
+     <input class="event__input  event__input--time" ${state.isDisabled ? 'disabled' : ''} id="event-start-time-1" type="text" name="event-start-time" 
      value="${formatSrtingToDateTime(point.dateFrom)}">
      &mdash;
      <label class="visually-hidden" for="event-end-time-1">To</label>
-     <input class="event__input  event__input--time" ${point.isDisabled ? 'disabled' : ''} id="event-end-time-1" type="text" name="event-end-time" 
+     <input class="event__input  event__input--time" ${state.isDisabled ? 'disabled' : ''} id="event-end-time-1" type="text" name="event-end-time" 
      value="${formatSrtingToDateTime(point.dateTo)}">
    </div>
 
@@ -102,12 +102,12 @@ export function createEditFormTemplate({state, offersModel, arrayDestinationsMod
        <span class="visually-hidden">Price</span>
        &euro;
      </label>
-     <input class="event__input  event__input--price" ${point.isDisabled ? 'disabled' : ''} id="event-price-1" type="number" min="0" name="event-price" value="${point.basePrice}">
+     <input class="event__input  event__input--price" ${state.isDisabled ? 'disabled' : ''} id="event-price-1" type="number" min="0" name="event-price" value="${point.basePrice}">
    </div>
-   <button class="event__save-btn  btn  btn--blue" type="submit" ${point.isDisabled ? 'disabled' : ''}>${point.isSaving ? 'Saving...' : 'Save'}</button>
+   <button class="event__save-btn  btn  btn--blue" type="submit" ${state.isDisabled ? 'disabled' : ''}>${state.isSaving ? 'Saving...' : 'Save'}</button>
 
    <!-- Кнопки и код на замену -->
-  ${editType === EditType.EDITING ? createEditButtonsTemplate(point.isDeleting) : createCancelButtonTemplate()}
+  ${editType === EditType.EDITING ? createEditButtonsTemplate(state.isDeleting) : createCancelButtonTemplate()}
    <!-- Кнопки и код на замену -->
 
  </header>
