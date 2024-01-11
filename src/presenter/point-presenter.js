@@ -103,6 +103,23 @@ export default class PointPresenter {
     }
   }
 
+  setAborting() {
+    if (this.#mode === Mode.DEFAULT) {
+      this.#pointComponent.shake();
+      return;
+    }
+
+    const resetFormState = () => {
+      this.#editingFormComponent.updateElement({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false,
+      });
+    };
+
+    this.#editingFormComponent.shake(resetFormState);
+  }
+
   #replacePointToForm () {
     replace(this.#editingFormComponent, this.#pointComponent);
     this.#handleModeChange();
