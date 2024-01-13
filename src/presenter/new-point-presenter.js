@@ -38,7 +38,7 @@ export default class NewPointPresenter {
       point,
       pointDestination: this.#destinationsModel.getById(point.destination),
       offersModel: this.#offersModel,
-      arrayDestinationsModel: this.#destinationsModel.destinations,
+      arrayDestinationsModel: this.#destinationsModel.get(),
       editType: EditType.CREATING,
       onResetClick: this.#resetClickHandler,
       onDeleteClick: this.#deleteClickHandler,

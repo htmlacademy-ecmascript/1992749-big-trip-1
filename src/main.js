@@ -11,6 +11,7 @@ import PointsApiService from './points-api-service.js';
 
 const AUTHORIZATION = 'Basic tr878kdldjd';
 const END_POINT = 'https://20.ecmascript.pages.academy/big-trip';
+const pointsApiService = new PointsApiService(END_POINT, AUTHORIZATION);
 const tripEventsContainer = document.querySelector('.trip-events');
 const filterContainer = document.querySelector('.trip-controls__filters');
 
@@ -18,7 +19,7 @@ const filterModel = new FilterModel();
 const destinationsModel = new DestinationsModel(mockDestinations);
 const offersModel = new OffersModel(mockOffers);
 const pointsModel = new PointsModel({
-  pointsApiService: new PointsApiService(END_POINT, AUTHORIZATION)
+  pointsApiService,
 });
 
 const filterPresenter = new FilterPresenter({

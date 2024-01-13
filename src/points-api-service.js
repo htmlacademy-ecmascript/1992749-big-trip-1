@@ -8,7 +8,17 @@ const Method = {
 };
 
 export default class PointsApiService extends ApiService {
-  get points() {
+  get getDestinations() {
+    return this._load({url: 'destinations'})
+      .then(ApiService.parseResponse);
+  }
+
+  get getOffers() {
+    return this._load({url: 'offers'})
+      .then(ApiService.parseResponse);
+  }
+
+  get getPoints() {
     return this._load({url: 'points'})
       .then(ApiService.parseResponse);
   }
