@@ -1,6 +1,6 @@
 import ListPresenter from './presenter/list-presenter.js';
-import { mockDestinations } from './mock/destinations-mock.js';
-import { mockOffers } from './mock/offers-mock.js';
+// import { mockDestinations } from './mock/destinations-mock.js';
+// import { mockOffers } from './mock/offers-mock.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offers-model.js';
 import PointsModel from './model/points-model.js';
@@ -15,9 +15,12 @@ const pointsApiService = new PointsApiService(END_POINT, AUTHORIZATION);
 const tripEventsContainer = document.querySelector('.trip-events');
 const filterContainer = document.querySelector('.trip-controls__filters');
 
+const destinationsApiService = await pointsApiService.getDestinations;
+const offersApiService = await pointsApiService.getOffers;
+
 const filterModel = new FilterModel();
-const destinationsModel = new DestinationsModel(mockDestinations);
-const offersModel = new OffersModel(mockOffers);
+const destinationsModel = new DestinationsModel(destinationsApiService);
+const offersModel = new OffersModel(offersApiService);
 const pointsModel = new PointsModel({
   pointsApiService,
 });
