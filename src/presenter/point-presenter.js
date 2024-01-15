@@ -47,7 +47,7 @@ export default class PointPresenter {
       point,
       pointDestination: this.#destinationsModel.getById(point.destination),
       offersModel: this.#offersModel,
-      arrayDestinationsModel: this.#destinationsModel.destinations,
+      arrayDestinationsModel: this.#destinationsModel.get(),
       onRollupClick: this.#rollupButtonClickHandler,
       onDeleteClick: this.#deleteClickHandler,
       onSubmitClick: this.#pointSubmitHandler,
@@ -64,7 +64,8 @@ export default class PointPresenter {
     }
 
     if (this.#mode === Mode.EDITING) {
-      replace(this.#editingFormComponent, prevEditingFormComponent);
+      replace(this.#pointComponent, prevEditingFormComponent);
+      this.#mode = Mode.DEFAULT;
     }
 
     remove(prevPointComponent);
@@ -82,6 +83,41 @@ export default class PointPresenter {
       this.#replaceFormToPoint();
       document.removeEventListener('keydown', this.#escKeyDownHandler);
     }
+  }
+
+  setSaving() {
+    if (this.#mode === Mode.EDITING) {
+      this.#editingFormComponent.updateElement({
+        isDisabled: true,
+        isSaving: true,
+      });
+    }
+  }
+
+  setDeleting() {
+    if (this.#mode === Mode.EDITING) {
+      this.#editingFormComponent.updateElement({
+        isDisabled: true,
+        isDeleting: true,
+      });
+    }
+  }
+
+  setAborting() {
+    if (this.#mode === Mode.DEFAULT) {
+      this.#pointComponent.shake();
+      return;
+    }
+
+    const resetFormState = () => {
+      this.#editingFormComponent.updateElement({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false,
+      });
+    };
+
+    this.#editingFormComponent.shake(resetFormState);
   }
 
   #replacePointToForm () {
@@ -124,7 +160,6 @@ export default class PointPresenter {
   };
 
   #pointSubmitHandler = (point) => {
-    this.#replaceFormToPoint();
     this.#handleDataChange(
       UserAction.UPDATE_POINT,
       UpdateType.MINOR,

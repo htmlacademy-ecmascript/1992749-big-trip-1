@@ -38,7 +38,7 @@ export default class NewPointPresenter {
       point,
       pointDestination: this.#destinationsModel.getById(point.destination),
       offersModel: this.#offersModel,
-      arrayDestinationsModel: this.#destinationsModel.destinations,
+      arrayDestinationsModel: this.#destinationsModel.get(),
       editType: EditType.CREATING,
       onResetClick: this.#resetClickHandler,
       onDeleteClick: this.#deleteClickHandler,
@@ -60,15 +60,34 @@ export default class NewPointPresenter {
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   };
 
+  setSaving() {
+    this.#editingFormComponent.updateElement({
+      isDisabled: true,
+      isSaving: true,
+    });
+  }
+
+  setAborting() {
+    const resetFormState = () => {
+      this.#editingFormComponent.updateElement({
+        isDisabled: false,
+        isSaving: false,
+        isDeleting: false,
+      });
+    };
+
+    this.#editingFormComponent.shake(resetFormState);
+  }
+
   #pointSubmitHandler = (point) => {
 
     if (isFormValid(point)) {
       this.#handleDataChange(
         UserAction.ADD_POINT,
         UpdateType.MINOR,
-        {id: crypto.randomUUID(), ...point},
+        point,
       );
-      this.destroy();
+
     }
   };
 
