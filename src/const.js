@@ -38,7 +38,7 @@ export const EditType = {
 
 export const pointDefault = {
   'type': 'flight',
-  'dateFrom': formatSrtingToDateTime(dayjs()),
+  'dateFrom': null,
   'dateTo': null,
   'destination': null,
   'basePrice': 0,
