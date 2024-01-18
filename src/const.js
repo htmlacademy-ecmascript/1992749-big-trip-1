@@ -43,3 +43,4 @@ export const pointDefault = {
   'offers': [],
 };
 
+export const DESTINATIONS_ITEMS_LENGTH = 3;
