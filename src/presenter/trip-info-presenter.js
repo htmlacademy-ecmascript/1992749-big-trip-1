@@ -66,7 +66,7 @@ export default class TripInfoPresenter {
     let offersPrice = 0;
 
     this.#sortedPoints.forEach((point) => {
-      offers = getCheckedOffers(point.offers, this.#offersModel.getByType(point.type));//.offers
+      offers = getCheckedOffers(point.offers, this.#offersModel.getByType(point.type));
 
       offers.forEach((offer) => {
         offersPrice += offer.price;
@@ -84,56 +84,3 @@ export default class TripInfoPresenter {
     this.init();
   };
 }
-
-
-/*
-import TripInfoView from '../view/trip-info-view';
-import { RenderPosition, render, remove, replace } from '../framework/render';
-
-export default class TripInfoPresenter {
-  #container = null;
-  #pointsModel = null;
-  #destinationsModel = null;
-  #offersModel = null;
-
-  #destinations = [];
-  #duration = 0;
-  #sum = 0;
-
-  #tripInfoComponent = null;
-
-  constructor({container, pointsModel, destinationsModel, offersModel}) {
-    this.#container = container;
-    this.#pointsModel = pointsModel;
-    this.#destinationsModel = destinationsModel;
-    this.#offersModel = offersModel;
-  }
-
-  init() {
-    this.#pointsModel.addObserver(this.#handleModelEvent);
-  }
-
-  #render = () => {
-    const prevTripInfoComponent = this.#tripInfoComponent;
-
-    this.#tripInfoComponent = new TripInfoView({
-      destinations: this.#destinationsModel.get(),
-      offers: this.#offersModel.get,
-      points: this.#pointsModel,
-    });
-
-    if (prevTripInfoComponent === null) {
-      render(this.#tripInfoComponent, this.#container, RenderPosition.AFTERBEGIN);
-      return;
-    }
-
-    replace(this.#tripInfoComponent, prevTripInfoComponent);
-    remove(prevTripInfoComponent);
-  };
-
-  #handleModelEvent = () => {
-    this.#render();
-  };
-
-}
-*/

@@ -21,7 +21,6 @@ const filterModel = new FilterModel();
 const destinationsModel = new DestinationsModel(destinationsApiService);
 const offersModel = new OffersModel(offersApiService);
 const pointsModel = new PointsModel({pointsApiService});
-// const test = await pointsApiService.getPoints;
 
 new TripInfoPresenter({
   tripMainEventsContainer: tripMainEventsContainer,
