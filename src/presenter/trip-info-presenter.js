@@ -66,7 +66,7 @@ export default class TripInfoPresenter {
     let offersPrice = 0;
 
     this.#sortedPoints.forEach((point) => {
-      offers = getCheckedOffers(point.offers, this.#offersModel.getByType(point.type).offers);
+      offers = getCheckedOffers(point.offers, this.#offersModel.getByType(point.type));//.offers
 
       offers.forEach((offer) => {
         offersPrice += offer.price;

@@ -6,7 +6,7 @@ import FilterModel from './model/filter-model.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import { getNewEvent, newEvent } from './presenter/new-point-presenter.js';
 import PointsApiService from './points-api-service.js';
-// import TripInfoPresenter from './presenter/trip-info-presenter.js';
+import TripInfoPresenter from './presenter/trip-info-presenter.js';
 
 const AUTHORIZATION = 'Basic tr878kdldjd';
 const END_POINT = 'https://20.ecmascript.pages.academy/big-trip';
@@ -15,7 +15,7 @@ const destinationsApiService = await pointsApiService.getDestinations;
 const offersApiService = await pointsApiService.getOffers;
 const tripEventsContainer = document.querySelector('.trip-events');
 const filterContainer = document.querySelector('.trip-controls__filters');
-// const tripMainEventsContainer = document.querySelector('.trip-main');
+const tripMainEventsContainer = document.querySelector('.trip-main');
 
 const filterModel = new FilterModel();
 const destinationsModel = new DestinationsModel(destinationsApiService);
@@ -23,12 +23,12 @@ const offersModel = new OffersModel(offersApiService);
 const pointsModel = new PointsModel({pointsApiService});
 // const test = await pointsApiService.getPoints;
 
-// const tripInfoPresenter = new TripInfoPresenter({
-//   tripMainEventsContainer: tripMainEventsContainer,
-//   offersModel,
-//   destinationsModel,
-//   pointsModel,
-// });
+new TripInfoPresenter({
+  tripMainEventsContainer: tripMainEventsContainer,
+  offersModel,
+  destinationsModel,
+  pointsModel,
+});
 
 const filterPresenter = new FilterPresenter({
   container: filterContainer,
