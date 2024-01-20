@@ -43,7 +43,7 @@ function destinationList(items) {
   return items.map((item) => `<option value="${item.name}"></option>`).join('');
 }
 
-export function createEditFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination, editType}){
+function createEditFormTemplate({state, offersModel, arrayDestinationsModel, pointDestination, editType}){
 
   const {point} = state;
   let currentDestination;
@@ -138,3 +138,4 @@ ${point.destination ? showOffers(offersModel, point.offers, point.type) : ''}
 </form>`;
 }
 
+export { createEditFormTemplate };

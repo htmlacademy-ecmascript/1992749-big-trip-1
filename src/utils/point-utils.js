@@ -19,16 +19,16 @@ const DATE_FORMAT = {
   watchMinute: 'HH:mm',
 };
 
-export const formatSrtingToDateTime = (inputDate) =>// полная дата
+const formatSrtingToDateTime = (inputDate) =>
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.fullData) : '';
 
-export const formatStringToShortDate = (inputDate) =>//месяц день малая
+const formatStringToShortDate = (inputDate) =>
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.monthDay) : '';
 
-export const formatStringToTime = (inputDate) =>// часы/минуты
+const formatStringToTime = (inputDate) =>
   inputDate ? dayjs(inputDate).format(DATE_FORMAT.watchMinute) : '';
 
-export const getPointDuration = (dateFrom, dateTo) => {//время нахождения в точке
+const getPointDuration = (dateFrom, dateTo) => {
   const timeDiff = dayjs(dateTo).diff(dayjs(dateFrom));
   let pointDuration = 0;
   switch (true){
@@ -45,32 +45,44 @@ export const getPointDuration = (dateFrom, dateTo) => {//время нахожд
   return pointDuration;
 };
 
-export function isPointFuture(point) {
+function isPointFuture(point) {
   return dayjs().isBefore(point.dateFrom);
 }
 
-export function isPointPresent(point) {
+function isPointPresent(point) {
   return dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
 }
 
-export function isPointPast(point) {
+function isPointPast(point) {
   return dayjs().isAfter(point.dateTo);
 }
 
-export function capitalize(string) {
+function capitalize(string) {
   return `${string[0].toUpperCase()}${string.slice(1)}`;
 }
 
-export const getPointsPriceDifference = (pointA, pointB) =>{
+const getPointsPriceDifference = (pointA, pointB) => {
   const pointAPrice = pointA.basePrice;
   const pointBPrice = pointB.basePrice;
   return pointBPrice - pointAPrice;
 };
 
-export const getPointsTimeDifference = (pointA, pointB) =>{
+const getPointsTimeDifference = (pointA, pointB) => {
   const pointADuration = dayjs(pointA.dateTo).diff(dayjs(pointA.dateFrom));
   const pointBDuration = dayjs(pointB.dateTo).diff(dayjs(pointB.dateFrom));
 
   return pointBDuration - pointADuration;
 };
 
+export {
+  formatSrtingToDateTime,
+  formatStringToShortDate,
+  formatStringToTime,
+  getPointDuration,
+  isPointFuture,
+  isPointPresent,
+  isPointPast,
+  capitalize,
+  getPointsPriceDifference,
+  getPointsTimeDifference,
+};

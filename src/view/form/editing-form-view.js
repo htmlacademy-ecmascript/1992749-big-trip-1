@@ -6,7 +6,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import dayjs from 'dayjs';
 import { formatSrtingToDateTime } from '../../utils/point-utils.js';
 
-export function isFormValid(point) {
+function isFormValid(point) {
   return point.destination !== null && point.destination !== undefined
     && point.basePrice !== 0 && point.basePrice !== undefined && point.basePrice > 0
 
@@ -216,3 +216,4 @@ export default class EditingFormView extends AbstractStatefulView {
 
 }
 
+export { isFormValid };
