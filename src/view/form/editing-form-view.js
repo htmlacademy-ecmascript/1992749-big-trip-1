@@ -14,7 +14,7 @@ function isFormValid(point) {
     && point.dateTo !== undefined && point.dateTo !== null;
 }
 export default class EditingFormView extends AbstractStatefulView {
-  #point = null;
+
   #pointDestination = null;
   #offersModel = null;
   #arrayDestinationsModel = null;

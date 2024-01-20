@@ -10,7 +10,7 @@ function showOffers (pointOffers, offers) {
   ) : '').join('');
 }
 
-function createPointTemplite({point, pointDestination, pointOffers}){
+function createPointTemplite({point, pointDestination, pointOffers}) {
   const { basePrice, type, isFavorite, dateFrom, dateTo, offers} = point;
   const { name} = pointDestination;
   return `<li class="trip-events__item"> 

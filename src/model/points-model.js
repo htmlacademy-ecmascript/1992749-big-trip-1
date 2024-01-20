@@ -11,6 +11,10 @@ export default class PointsModel extends Observable{
     this.#pointsApiService = pointsApiService;
   }
 
+  get() {
+    return this.#points;
+  }
+
   async init() {
     try {
       const points = await this.#pointsApiService.getPoints;
@@ -20,10 +24,6 @@ export default class PointsModel extends Observable{
     }
     newEvent.setAttribute('disabled', 'disabled');
     this._notify(UpdateType.INIT);
-  }
-
-  get() {
-    return this.#points;
   }
 
   async updatePoint(updateType, update) {
