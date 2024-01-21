@@ -3,9 +3,9 @@ import { render, remove, RenderPosition } from '../framework/render';
 import { UserAction, UpdateType, EditType, pointDefault } from '../const';
 import { isFormValid } from '../view/form/editing-form-view';
 
-export const newEvent = document.querySelector('.trip-main__event-add-btn');
+const newEvent = document.querySelector('.trip-main__event-add-btn');
 
-export function getNewEvent (presenter) {
+function getNewEvent (presenter) {
   return newEvent.addEventListener('click', () => {
     presenter.createPoint();
     newEvent.setAttribute('disabled', 'disabled');
@@ -113,3 +113,4 @@ export default class NewPointPresenter {
 
 }
 
+export { newEvent, getNewEvent };

@@ -1,6 +1,7 @@
 import AbstractView from '../framework/view/abstract-view';
 import { capitalize } from '../utils/point-utils.js';
-export const filtersContainer = document.querySelector('.trip-controls__filters');
+
+const filtersContainer = document.querySelector('.trip-controls__filters');
 
 function createFilterItemTemplite(filter, currentFilterType){
   return `<div class="trip-filters__filter">
@@ -56,3 +57,4 @@ export default class FilterView extends AbstractView {
 
 }
 
+export { filtersContainer };

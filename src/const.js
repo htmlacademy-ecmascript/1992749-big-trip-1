@@ -1,13 +1,15 @@
-export const TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+const TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
-export const FilterType = {
+const DESTINATIONS_ITEMS_LENGTH = 3;
+
+const FilterType = {
   EVERYTHING: 'everything',
   FUTURE:'future',
   PRESENT:'present',
   PAST:'past',
 };
 
-export const SortType = {
+const SortType = {
   DAY: 'day',
   EVENT: 'event',
   TIME: 'time',
@@ -15,25 +17,25 @@ export const SortType = {
   OFFER: 'offer',
 };
 
-export const UserAction = {
+const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
   ADD_POINT: 'ADD_POINT',
   DELETE_POINT: 'DELETE_POINT',
 };
 
-export const UpdateType = {
+const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
   MAJOR: 'MAJOR',
   INIT: 'INIT',
 };
 
-export const EditType = {
+const EditType = {
   EDITING: 'EDITING',
   CREATING: 'CREATING',
 };
 
-export const pointDefault = {
+const pointDefault = {
   'type': 'flight',
   'dateFrom': null,
   'dateTo': null,
@@ -43,4 +45,13 @@ export const pointDefault = {
   'offers': [],
 };
 
-export const DESTINATIONS_ITEMS_LENGTH = 3;
+export {
+  TYPES,
+  DESTINATIONS_ITEMS_LENGTH,
+  FilterType,
+  SortType,
+  UserAction,
+  UpdateType,
+  EditType,
+  pointDefault,
+};

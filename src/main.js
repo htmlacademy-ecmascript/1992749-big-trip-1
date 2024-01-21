@@ -8,14 +8,15 @@ import { getNewEvent, newEvent } from './presenter/new-point-presenter.js';
 import PointsApiService from './points-api-service.js';
 import TripInfoPresenter from './presenter/trip-info-presenter.js';
 
+const tripEventsContainer = document.querySelector('.trip-events');
+const filterContainer = document.querySelector('.trip-controls__filters');
+const tripMainEventsContainer = document.querySelector('.trip-main');
+
 const AUTHORIZATION = 'Basic tr878kdldjd';
 const END_POINT = 'https://20.ecmascript.pages.academy/big-trip';
 const pointsApiService = new PointsApiService(END_POINT, AUTHORIZATION);
 const destinationsApiService = await pointsApiService.getDestinations;
 const offersApiService = await pointsApiService.getOffers;
-const tripEventsContainer = document.querySelector('.trip-events');
-const filterContainer = document.querySelector('.trip-controls__filters');
-const tripMainEventsContainer = document.querySelector('.trip-main');
 
 const filterModel = new FilterModel();
 const destinationsModel = new DestinationsModel(destinationsApiService);
