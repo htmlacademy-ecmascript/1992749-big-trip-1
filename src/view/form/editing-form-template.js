@@ -23,7 +23,11 @@ function showType(types, activeType) {
 function showOffers(offersModel, selectedOffers, type) {
   const offersByType = offersModel.getByType(type);
 
-  return offersByType.map((item) => (`<div class="event__offer-selector">
+  return offersByType.length === 0 ? '' : `
+  <section class="event__section  event__section--offers">
+  <h3 class="event__section-title  event__section-title--offers">Offers</h3>
+  <div class="event__available-offers">
+  ${offersByType.map((item) => (`<div class="event__offer-selector">
   <input class="event__offer-checkbox  visually-hidden" id="event-offer-${item.id}"
   data-offer-id="${item.id}" type="checkbox" name="event-offer-seats" 
   ${selectedOffers.find((elem) => elem === item.id) ? 'checked' : ''}>
@@ -32,7 +36,10 @@ function showOffers(offersModel, selectedOffers, type) {
     &plus;&euro;&nbsp;
     <span class="event__offer-price">${item.price}</span>
   </label>
-</div>`)).join('');
+</div>`)).join('')
+}
+</div>
+</section>`;
 }
 
 function showPhotos(photos){
@@ -114,25 +121,23 @@ function createEditFormTemplate({state, offersModel, arrayDestinationsModel, poi
  
  <section class="event__details">
 
- <section class="event__section  event__section--offers">
- <h3 class="event__section-title  event__section-title--offers">Offers</h3>
- <div class="event__available-offers">
-${point.destination ? showOffers(offersModel, point.offers, point.type) : ''}
- </div>
-</section>
+   ${point.destination ? showOffers(offersModel, point.offers, point.type) : ''}
 
- <section class="event__section  event__section--destination">
-   <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-   <p class="event__destination-description">${point.destination ? currentDestination.description : ''}</p>
    ${point.destination ?
-    `<div class="event__photos-container">
+    `<section class="event__section  event__section--destination">
+    <h3 class="event__section-title  event__section-title--destination">Destination</h3>
+    <p class="event__destination-description">${point.destination ? currentDestination.description : ''}</p>
+
+    <div class="event__photos-container">
      <div class="event__photos-tape">` : ''}
        ${point.destination ? showPhotos(currentDestination.pictures) : ''}
-   ${point.destination ?
+   
+       ${point.destination ?
     `</div>
-   </div>` : ''}
+   </div>
+   </section>
+   ` : ''}
 
- </section>
 </section>
 
 </form>`;
