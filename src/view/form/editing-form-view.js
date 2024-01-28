@@ -71,6 +71,8 @@ export default class EditingFormView extends AbstractStatefulView {
   }
 
   _restoreHandlers = () => {
+    const availableOffers = this.element.querySelector('.event__available-offers');
+
     if (this.#editType === EditType.EDITING) {
       this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupButtonClickHandler);
       this.element.querySelector('.event__reset-btn').addEventListener('click', this.#formDeleteClickHandler);
@@ -82,7 +84,10 @@ export default class EditingFormView extends AbstractStatefulView {
     this.element.querySelector('.event__input--destination').addEventListener('change',this.#destinationChangeHandler);
     this.element.querySelector('.event__input--price').addEventListener('change',this.#priceChangeHandler);
     this.element.querySelector('.event__type-group').addEventListener('change',this.#typeChangeHandler);
-    this.element.querySelector('.event__available-offers').addEventListener('change',this.#offersChangeHandler);
+
+    if (availableOffers) {
+      availableOffers.addEventListener('change',this.#offersChangeHandler);
+    }
 
     this.#setDatepicker();
   };

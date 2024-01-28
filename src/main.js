@@ -13,7 +13,7 @@ const filterContainer = document.querySelector('.trip-controls__filters');
 const tripMainEventsContainer = document.querySelector('.trip-main');
 
 const AUTHORIZATION = 'Basic tr878kdldjd';
-const END_POINT = 'https://20.ecmascript.pages.academy/big-trip';
+const END_POINT = 'https://20.objects.htmlacademy.pro/big-trip';
 const pointsApiService = new PointsApiService(END_POINT, AUTHORIZATION);
 const destinationsApiService = await pointsApiService.getDestinations;
 const offersApiService = await pointsApiService.getOffers;

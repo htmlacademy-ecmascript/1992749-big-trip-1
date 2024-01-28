@@ -57,7 +57,17 @@ export default class TripInfoPresenter {
 
   #getTripDuration() {
     const sortedPoints = this.#pointsModel.get().sort(sortPointsByDay);
-    return (sortedPoints.length > 0) ? `${dayjs(sortedPoints.at(0).dateFrom).format('DD MMM')}&nbsp;&mdash;&nbsp;${dayjs(sortedPoints.at(-1).dateTo).format('DD MMM')}` : '';
+    const monthFirstPoint = dayjs(sortedPoints.at(0).dateFrom).format('MMM');
+    const monthLastPoint = dayjs(sortedPoints.at(-1).dateTo).format('MMM');
+
+    if (sortedPoints.length > 0 && monthFirstPoint !== monthLastPoint) {
+      return `${dayjs(sortedPoints.at(0).dateFrom).format('DD MMM')}&nbsp;&mdash;&nbsp;${dayjs(sortedPoints.at(-1).dateTo).format('DD MMM')}`;
+    }
+    if (sortedPoints.length > 0 && monthFirstPoint === monthLastPoint) {
+      return `${monthFirstPoint} ${dayjs(sortedPoints.at(0).dateFrom).format('DD')}&nbsp;&mdash;&nbsp;${dayjs(sortedPoints.at(-1).dateTo).format('DD')}`;
+    }
+
+    return '';
   }
 
   #getTripCost() {
