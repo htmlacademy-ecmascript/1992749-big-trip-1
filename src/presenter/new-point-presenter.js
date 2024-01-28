@@ -2,8 +2,10 @@ import EditingFormView from '../view/form/editing-form-view';
 import { render, remove, RenderPosition } from '../framework/render';
 import { UserAction, UpdateType, EditType, pointDefault } from '../const';
 import { isFormValid } from '../view/form/editing-form-view';
+import PointsContainerView from '../view/points-container-view';
 
 const newEvent = document.querySelector('.trip-main__event-add-btn');
+const tripEventsContainer = document.querySelector('.trip-events');
 
 function getNewEvent (presenter) {
   return newEvent.addEventListener('click', () => {
@@ -14,14 +16,17 @@ function getNewEvent (presenter) {
 
 export default class NewPointPresenter {
   #pointsContainer = null;
+  #pointsContainerView = null;
+  #pointsModel = null;
   #destinationsModel = null;
   #offersModel = null;
   #handleDataChange = null;
 
   #editingFormComponent = null;
 
-  constructor({pointsContainer, destinationsModel, offersModel, onDataChange}) {
+  constructor({pointsContainer, pointsModel, destinationsModel, offersModel, onDataChange}) {
     this.#pointsContainer = pointsContainer;
+    this.#pointsModel = pointsModel;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
     this.#handleDataChange = onDataChange;
@@ -45,13 +50,23 @@ export default class NewPointPresenter {
       onSubmitClick: this.#pointSubmitHandler,
     });
 
-    render(this.#editingFormComponent, this.#pointsContainer, RenderPosition.AFTERBEGIN);
+    if (this.#pointsModel.get().length === 0) {
+      this.#pointsContainerView = new PointsContainerView();
+      render(this.#pointsContainerView, tripEventsContainer, RenderPosition.AFTERBEGIN);
+      render(this.#editingFormComponent, this.#pointsContainerView.element);
+    } else {
+      render(this.#editingFormComponent, this.#pointsContainer, RenderPosition.AFTERBEGIN);
+    }
+
     document.addEventListener('keydown', this.#escKeyDownHandler);
   }
 
   destroy = () => {
     if (this.#editingFormComponent === null) {
       return;
+    }
+    if (this.#pointsContainerView) {
+      remove(this.#pointsContainerView);
     }
 
     remove(this.#editingFormComponent);
