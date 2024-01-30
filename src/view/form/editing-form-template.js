@@ -43,7 +43,12 @@ function showOffers(offersModel, selectedOffers, type) {
 }
 
 function showPhotos(photos){
-  return photos.map((item) => (`<img class="event__photo" src=${item.src} alt="${item.description}">`)).join('');
+  return `<div class="event__photos-container">
+            <div class="event__photos-tape">
+  ${photos.map((item) => (`<img class="event__photo" src=${item.src} alt="${item.description}">`)).join('')}
+            </div>
+        </div>
+  `;
 }
 
 function destinationList(items) {
@@ -125,20 +130,20 @@ function createEditFormTemplate({state, offersModel, arrayDestinationsModel, poi
 
    ${point.destination ?
     `<section class="event__section  event__section--destination">
-    <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-    <p class="event__destination-description">${point.destination ? currentDestination.description : ''}</p>
 
-    <div class="event__photos-container">
-     <div class="event__photos-tape">` : ''}
-       ${point.destination ? showPhotos(currentDestination.pictures) : ''}
+      ${(currentDestination.description) ? `
+      <h3 class="event__section-title  event__section-title--destination">Destination</h3>
+      <p class="event__destination-description">
+      ${currentDestination.description}
+        </p>
+       ` : ''}
+  
+       ${(currentDestination.pictures.length > 0) ? showPhotos(currentDestination.pictures) : ''}
    
-       ${point.destination ?
-    `</div>
-   </div>
-   </section>
+      </section>
    ` : ''}
 
-</section>
+ </section>
 
 </form>`;
 }
