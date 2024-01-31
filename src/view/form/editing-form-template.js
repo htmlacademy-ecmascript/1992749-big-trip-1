@@ -126,7 +126,7 @@ function createEditFormTemplate({state, offersModel, arrayDestinationsModel, poi
  
  <section class="event__details">
 
-   ${point.destination ? showOffers(offersModel, point.offers, point.type) : ''}
+   ${showOffers(offersModel, point.offers, point.type)}
 
    ${point.destination ?
     `<section class="event__section  event__section--destination">
